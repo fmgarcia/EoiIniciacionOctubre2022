@@ -214,15 +214,45 @@ public class Ejercicios {
 			for(int j=0; j< notas[i].length; j++) {
 				sumaNotas += notas[i][j];  // hacemos la suma de todas sus notas
 				sumaTotal += notas[i][j];  // incrementamos la suma total de las notas de todos los alumnos
-				contadorNotas++;
+				contadorNotas++;  // contadorNotas = contadorNotas + 1;
 			}
 			double media = (double)sumaNotas / notas[i].length;  // calculamos su media
 			System.out.println(nombreAlumnos[i] + " tiene nota media: " + media);
 		}
 		
 		System.out.println("La nota media del curso es: " + ((double)sumaTotal/contadorNotas));
-		System.out.println("La nota media del curso es: " + ((double)sumaTotal/(notas.length*notas[0].length)));
+		System.out.println("La nota media del curso es: " + ((double)sumaTotal/(notas.length*notas[0].length)));  // notas.length es el número de filas y notas[0].length el número de columnas de la primera fila
 		
+	}
+	
+	public static void ejercicio12() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca el número de alumnos: ");
+		int numAlumnos = Integer.parseInt(sc.nextLine());
+		
+		String[] nombreAlumnos = new String[numAlumnos];
+		int[][] notas = new int[numAlumnos][4];
+		
+		// Aquí rellenaré los datos de los alumnos
+		for(int i = 0 ; i < nombreAlumnos.length; i++) {
+			System.out.println("Intrduzca el nombre del alumno " + (i+1));
+			nombreAlumnos[i] = sc.nextLine();
+			for(int j=0; j< notas[i].length; j++) {
+				System.out.println("Introduzca para el alumno " + (i+1) + " la nota "+ (j+1));
+				notas[i][j] = Integer.parseInt(sc.nextLine());
+			}
+		}
+		
+		for(int i = 0 ; i < nombreAlumnos.length; i++) {
+			int sumaNotas = 0;  // para cada alumno le damos valor 0 para que no arrastre los datos del alumno anterior
+			for(int j=0; j< notas[i].length; j++) {
+				sumaNotas += notas[i][j];  // hacemos la suma de todas sus notas
+			}
+			double media = (double)sumaNotas / notas[i].length;  // calculamos su media
+			System.out.println(nombreAlumnos[i] + " tiene nota media: " + media);
+		}
+		
+		sc.close();
 	}
 	
 
@@ -236,7 +266,8 @@ public class Ejercicios {
 		//ejercicio9ContadorLetras();
 		//ejemploContarAPF();
 		//ejercicio11();
-		ejercicio11MediasTotales();
+		//ejercicio11MediasTotales();
+		ejercicio12();
 	}
 
 }
