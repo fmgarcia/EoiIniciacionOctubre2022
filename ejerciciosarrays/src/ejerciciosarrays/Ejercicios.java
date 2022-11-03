@@ -192,8 +192,36 @@ public class Ejercicios {
 				sumaNotas += notas[i][j];  // hacemos la suma de todas sus notas
 			}
 			double media = (double)sumaNotas / notas[i].length;  // calculamos su media
-			System.out.println("Nombre: " + nombreAlumnos[i] + " tiene nota media: " + media);
+			System.out.println(nombreAlumnos[i] + " tiene nota media: " + media);
 		}
+		
+	}
+	
+	public static void ejercicio11MediasTotales() {
+		
+		String[] nombreAlumnos = {"María","José","Ana","Gustavo"};
+		int[][] notas = {
+				{8,4,6,9},
+				{2,9,1,5},
+				{3,6,10,9},
+				{8,5,6,9}			
+		};
+		
+		int sumaTotal = 0;
+		int contadorNotas = 0;
+		for(int i = 0 ; i < nombreAlumnos.length; i++) {
+			int sumaNotas = 0;  // para cada alumno le damos valor 0 para que no arrastre los datos del alumno anterior
+			for(int j=0; j< notas[i].length; j++) {
+				sumaNotas += notas[i][j];  // hacemos la suma de todas sus notas
+				sumaTotal += notas[i][j];  // incrementamos la suma total de las notas de todos los alumnos
+				contadorNotas++;
+			}
+			double media = (double)sumaNotas / notas[i].length;  // calculamos su media
+			System.out.println(nombreAlumnos[i] + " tiene nota media: " + media);
+		}
+		
+		System.out.println("La nota media del curso es: " + ((double)sumaTotal/contadorNotas));
+		System.out.println("La nota media del curso es: " + ((double)sumaTotal/(notas.length*notas[0].length)));
 		
 	}
 	
@@ -207,7 +235,8 @@ public class Ejercicios {
 		//ejercicio9ContadorVocalesSwitch();
 		//ejercicio9ContadorLetras();
 		//ejemploContarAPF();
-		ejercicio11();
+		//ejercicio11();
+		ejercicio11MediasTotales();
 	}
 
 }
