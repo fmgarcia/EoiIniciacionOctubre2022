@@ -177,7 +177,24 @@ public class Ejercicios {
 	}
 	
 	public static void ejercicio11() {
-		// comentario de prueba
+		
+		String[] nombreAlumnos = {"María","José","Ana","Gustavo"};
+		int[][] notas = {
+				{8,4,6,9},
+				{2,9,1,5},
+				{3,6,10,9},
+				{8,5,6,9}			
+		};
+		
+		for(int i = 0 ; i < nombreAlumnos.length; i++) {
+			int sumaNotas = 0;  // para cada alumno le damos valor 0 para que no arrastre los datos del alumno anterior
+			for(int j=0; j< notas[i].length; j++) {
+				sumaNotas += notas[i][j];  // hacemos la suma de todas sus notas
+			}
+			double media = (double)sumaNotas / notas[i].length;  // calculamos su media
+			System.out.println("Nombre: " + nombreAlumnos[i] + " tiene nota media: " + media);
+		}
+		
 	}
 	
 
