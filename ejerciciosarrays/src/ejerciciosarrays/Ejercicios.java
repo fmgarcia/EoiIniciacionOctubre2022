@@ -472,10 +472,66 @@ public class Ejercicios {
 		for(int i =0;i<negativos.length;i++) {
 			System.out.printf("%d ",negativos[i]);
 		}
+		System.out.println();
 		
+		Arrays.sort(positivos);
+		
+		for(int i =0;i<positivos.length;i++) {
+			System.out.printf("%d ",positivos[i]);
+		}
 		
 		
 	}
+	
+	public static void ejercicioAdicional2()
+	{
+		Scanner sc=new Scanner(System.in);
+		int[] numeros;
+		int cuantos;
+		int minimo,maximo;
+		double media,mediana;
+		
+		System.out.print("Cuantos elementos?");
+		cuantos=sc.nextInt();
+		
+		numeros=new int[cuantos];
+		
+		for(int i=0;i<numeros.length;i++)
+		{
+			System.out.print("Numero:");
+			numeros[i]=sc.nextInt();
+		}
+		Arrays.sort(numeros);
+		minimo=numeros[0];
+		maximo=numeros[numeros.length-1];
+		if(numeros.length%2==0)
+		{
+			mediana=((double)numeros[numeros.length/2]+
+					numeros[(numeros.length/2)-1])/2;
+		}
+		else{
+			mediana=numeros[numeros.length/2];
+		}
+		int suma=0;
+		int suma2=0;
+		for(int i=0;i<numeros.length;i++)
+		{
+			suma+=numeros[i];
+		}
+		
+		suma2=Arrays.stream(numeros).sum();
+		
+		System.out.println(suma+" "+suma2);
+		media=(double)suma/numeros.length;
+		
+		System.out.println("Maximo:"+maximo+
+							"Minimo:"+minimo+
+							"Media:"+media+
+							"Mediana"+mediana);
+		
+	}
+	
+	
 	
 
 	public static void main(String[] args) {
@@ -495,7 +551,8 @@ public class Ejercicios {
 		//ejercicio5RepasoPF();
 		//ejercicio6Repaso();
 		//ejercicio08Repaso();
-		ejercicioRepasoAdicional();
+		//ejercicioRepasoAdicional();
+		ejercicioAdicional2();
 		
 	}
 
