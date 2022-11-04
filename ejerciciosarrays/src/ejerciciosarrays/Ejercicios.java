@@ -255,6 +255,175 @@ public class Ejercicios {
 		sc.close();
 	}
 	
+	public static void ejercicio2Repaso()
+	{
+		Scanner sc=new Scanner(System.in);
+		int[] numeros=new int[10];
+		int suma=0;
+		double media=0;
+		
+		for(int i=0;i<10;i++)
+		{
+			System.out.println("N:");
+			numeros[i]=sc.nextInt();
+		}
+		sc.close();
+		for(int i=0;i<10;i+=2)
+		{
+			suma+=numeros[i];
+		}
+		media=suma/(numeros.length/2);
+		System.out.println(media);
+		
+	}
+	
+	public static void ejercicio5Repaso()
+	{
+		// 1.- Rellenar array
+		// 2.- Recorrer array y llevar 3 contadores
+		// cuantosPositivos, cuantosNegativos, cuantosCeros
+		// por cada positivo sumo uno a cuantosPositivos
+		//para los negativos y ceros lo mismo
+		
+		
+		Scanner sc=new Scanner(System.in);
+		int[] numeros=new int[10];
+		int cuantosPositivos=0,cuantosNegativos=0,cuantosCeros=0;
+		
+		for(int i=0;i<10;i++)
+		{
+			System.out.print("Número:");
+			numeros[i]=sc.nextInt();
+		}
+		sc.close();
+		for(int i=0;i<10;i++)
+		{
+			if(numeros[i]>0)
+				cuantosPositivos++;
+			else if(numeros[i]<0)
+				cuantosNegativos++;
+			else
+				cuantosCeros++;
+		}
+		System.out.printf("Positivos:%d Negativos:%d Ceros:%d",
+				cuantosPositivos,cuantosNegativos,cuantosCeros);	
+	}
+	
+	public static void ejercicio5RepasoPF()
+	{
+		Scanner sc=new Scanner(System.in);
+		int[] numeros=new int[10];
+		int cuantosPositivos=0,cuantosNegativos=0,cuantosCeros=0;		
+		for(int i=0;i<10;i++)
+		{
+			System.out.print("Número:");
+			numeros[i]=sc.nextInt();
+		}
+		sc.close();
+		cuantosPositivos=(int)Arrays.stream(numeros).filter(n->n>0).count();
+		cuantosNegativos=(int)Arrays.stream(numeros).filter(n->n<0).count();
+		cuantosCeros=(int)Arrays.stream(numeros).filter(n->n==0).count();
+		
+		
+		System.out.println(cuantosPositivos);
+		
+	}
+	
+	public static void ejercicio6Repaso()
+	{
+		/*1 Rellenar array
+		 * 2.Recorrer array y 
+		 * si es positivo el contenido
+		 * 		sumaPositivos+=numeros[i]
+		 * 		cuantosPositivos++;
+		 * si es negativo lo sumo a los negativos 
+		 * Cuando termino de recorre el array
+		 * saco las medias:
+		 *    sumaPositivos/cuantosPositivos
+		 *    sumaNegativos/cuantosNegativos
+		 */
+		Scanner sc=new Scanner(System.in);
+		int[] numeros=new int[10];
+		int cuantosPositivos=0,cuantosNegativos=0,cuantosCeros=0;
+		double mediaPositivos=0,mediaNegativos=0;
+		int sumaPositivos=0,sumaNegativos=0;
+		for(int i=0;i<10;i++)
+		{
+			System.out.print("Número:");
+			numeros[i]=sc.nextInt();
+		}
+		sc.close();
+		for(int i=0;i<10;i++)
+		{
+			if(numeros[i]>0)
+			{
+				cuantosPositivos++;
+				sumaPositivos+=numeros[i];
+			}
+			else if(numeros[i]<0)
+			{
+				cuantosNegativos++;
+				sumaNegativos+=numeros[i];
+			}
+			
+		}
+		mediaPositivos=(double)sumaPositivos/cuantosPositivos;
+		mediaNegativos=(double)sumaNegativos/cuantosNegativos;
+		
+		System.out.printf("Media positivos:%.2f Media negativos:%.2f",
+							mediaPositivos,mediaNegativos);
+		
+		
+	}
+	
+	public static void ejercicio08Repaso()
+	{
+		/* 1.- Rellenar los 2 arrays al mismo tiempo --> en un solo for
+		 * 2.- Inicializo la variable maxSueldo=sueldos[0] 
+		 * 											indiceMaximo=0
+		 * 3.- Busco sueldo máximo y actualizo índice máximo 
+		 * 4.- Mostrar el nombre del empleado con el sueldo más alto
+		 */
+		Scanner sc=new Scanner(System.in);
+	/*	String[] nombres=new String[20];
+		double[] sueldos=new double[20];
+		*/
+		
+		String[] nombres= {"Pepe","Juan","León","María","Lucía"};
+		double[] sueldos= {2000,53000,1000,2345,4567};
+		double maxSueldo;
+		int indiceMaximo;
+		
+	/*	for(int i=0;i<nombres.length;i++)
+		{
+			System.out.print("Nombre:");
+			nombres[i]=sc.next();
+			System.out.print("Sueldo");
+			sueldos[i]=sc.nextDouble();
+		}*/
+		
+		
+		maxSueldo=sueldos[0];
+		indiceMaximo=0;
+		for(int i=1;i<sueldos.length;i++)
+		{
+			if(sueldos[i]>maxSueldo)
+			{
+				maxSueldo=sueldos[i];
+				indiceMaximo=i;
+			}
+		}
+		System.out.printf("%s con %.2f sueldo",
+				nombres[indiceMaximo],sueldos[indiceMaximo]);
+	
+		sc.close();
+		
+		
+		
+		
+		
+	}
+	
 
 	public static void main(String[] args) {
 		//ejercicio8();
@@ -267,7 +436,13 @@ public class Ejercicios {
 		//ejemploContarAPF();
 		//ejercicio11();
 		//ejercicio11MediasTotales();
-		ejercicio12();
+		//ejercicio12();
+		//ejercicio2Repaso();
+		//ejercicio5Repaso();
+		//ejercicio5RepasoPF();
+		//ejercicio6Repaso();
+		ejercicio08Repaso();
+		
 	}
 
 }
