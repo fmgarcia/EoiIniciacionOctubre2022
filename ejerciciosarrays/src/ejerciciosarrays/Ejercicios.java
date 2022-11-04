@@ -418,7 +418,60 @@ public class Ejercicios {
 	
 		sc.close();
 		
+	}
+	
+	public static void ejercicioRepasoAdicional()
+	{
 		
+		Scanner sc=new Scanner(System.in);
+		int[] numeros=new int[10];
+		int cuantosPositivos=0,cuantosNegativos=0,cuantosCeros=0;
+		
+		for(int i=0;i<10;i++)
+		{
+			System.out.print("Número:");
+			numeros[i]=sc.nextInt();
+		}
+		sc.close();
+		for(int i=0;i<10;i++)
+		{
+			if(numeros[i]>0)
+				cuantosPositivos++;
+			else if(numeros[i]<0)
+				cuantosNegativos++;
+			else
+				cuantosCeros++;
+		}
+		// A continuación creamos un array para los números positivos
+		// y otro para los números negativos
+		//Recorremos al array original y guardamos los positivos
+		//en su array y lo negativos en el suyo
+		//Cada array debe tener su propio índice
+		
+		int[] positivos=new int[cuantosPositivos];
+		int[] negativos=new int[cuantosNegativos];
+		int indiceNegativos=0;
+		int indicePositivos=0;
+		
+		for(int i=0;i<numeros.length;i++)
+		{
+			if(numeros[i]>0)
+			{
+				positivos[indicePositivos]=numeros[i];
+				indicePositivos++;
+			}
+			else if (numeros[i]<0) {
+				negativos[indiceNegativos]=numeros[i];
+				indiceNegativos++;
+			}
+		}
+		
+		for(int i =0;i<positivos.length;i++) {
+			System.out.printf("%d ",positivos[i]);
+		}
+		for(int i =0;i<negativos.length;i++) {
+			System.out.printf("%d ",negativos[i]);
+		}
 		
 		
 		
@@ -441,7 +494,8 @@ public class Ejercicios {
 		//ejercicio5Repaso();
 		//ejercicio5RepasoPF();
 		//ejercicio6Repaso();
-		ejercicio08Repaso();
+		//ejercicio08Repaso();
+		ejercicioRepasoAdicional();
 		
 	}
 
