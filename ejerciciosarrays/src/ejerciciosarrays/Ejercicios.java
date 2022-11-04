@@ -531,6 +531,54 @@ public class Ejercicios {
 		
 	}
 	
+	public static void ejercicioAdicional3()
+	{
+		/* Usaremos 2 arrays
+		 * Uno con los nombres de los meses
+		 * otro con los días de cada mes
+		 * El usuario nos dice el nombre de un mes
+		 * y nosotros responderemos cuantos días tiene ese mes
+		 */
+		Scanner sc=new Scanner(System.in);
+		String[] meses= {"Enero","Febrero","Marzo","Abril",
+						"Mayo","Junio","Julio","Agosto",
+						"Septiembre","Octubre","Noviembre","Diciembre"};
+		int[] dias= {31,28,31,30,31,30,31,31,30,31,30,31};
+		String nombreMes;
+		System.out.print("Introduzca el nombre del mes:");
+		nombreMes=sc.nextLine();
+		sc.close();
+		for(int i=0;i<meses.length;i++)
+		{
+			if(nombreMes.equalsIgnoreCase(meses[i]))
+			{
+				System.out.println(
+						nombreMes +" tiene "+ dias[i] + " días");
+			}
+		}
+				
+	}
+	public static void ejercicio13()
+	{
+		//String[][] productos=new String[4][3];
+		
+		String[][] productos= {{"Mesa","99.50","3"},
+							   {"Silla","14.95","4"},
+							   {"Sillón","200.3","2"},
+							   {"Sofá","500","1"}};
+		
+		System.out.printf(" %-10s %9s %7s %7s\n",
+						" NOMBRE","PRECIO","CANTIDAD","TOTAL");
+		System.out.println("--------------------------------------");
+		for(int i=0;i<productos.length;i++)
+		{			
+				System.out.printf("%-10s %9.2f %6d %9.2f\n",
+						productos[i][0],Double.parseDouble(productos[i][1]),
+						Integer.parseInt(productos[i][2]),
+						Double.parseDouble(productos[i][1])
+						* Integer.parseInt(productos[i][2]));
+		}	
+	}
 	
 	
 
@@ -552,7 +600,9 @@ public class Ejercicios {
 		//ejercicio6Repaso();
 		//ejercicio08Repaso();
 		//ejercicioRepasoAdicional();
-		ejercicioAdicional2();
+		//ejercicioAdicional2();
+		//ejercicioAdicional3();
+		ejercicio13();
 		
 	}
 
