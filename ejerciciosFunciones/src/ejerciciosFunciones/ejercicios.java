@@ -25,8 +25,36 @@ public class ejercicios {
 		return n1+n2;
 	}
 	
+	public static void dibujaCuadrado(char c,int n)
+	{
+		for(int fila=0;fila<n;fila++)
+		{
+			for(int columna=0;columna<n;columna++)
+			{
+				System.out.print(c);
+			}
+			System.out.println();
+		}
+	}
+	
+	public static void mostrarTrabajos(String nombre,String ...tareas)
+	{
+		System.out.println(nombre+":");
+		if(tareas.length==0)
+		{
+			System.out.println("Esta persona no ha trabajado nunca");
+		}
+		else
+		{
+			for(int i=0;i<tareas.length;i++)
+			{
+				System.out.println(tareas[i]);
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
-		for(int i=0;i<3;i++) {
+		/*for(int i=0;i<3;i++) {
 			dibujaAsteriscos(20);
 			System.out.println();
 		}
@@ -40,8 +68,20 @@ public class ejercicios {
 		if(longitudEntre2("hola",2,8))
 			System.out.println("Sí");
 		if(longitudEntre2("Hola que tal?",2,8))
-			System.out.println("Sí");		
-
+			System.out.println("Sí");	
+		*/
+		
+		/*for(char c='a';c<'z';c++)
+			dibujaCuadrado(c,4);
+		dibujaCuadrado('@',5);
+		*/
+		
+		mostrarTrabajos("Mari Chelo","Formatear equipo","Pasear al perro","Comprar pan");
+		mostrarTrabajos("Pepe");
+		mostrarTrabajos("María","Comprar chips");
+		
+		
+		
 	}
 
 }
