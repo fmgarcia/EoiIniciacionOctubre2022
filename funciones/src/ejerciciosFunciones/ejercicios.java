@@ -175,6 +175,31 @@ public class ejercicios {
 		return maximo;
 	}
 	
+	public static int cuantasVeces(String cadena,String subcadena) {
+		
+		int posicion=0;
+		int contador=0;
+		
+		while(posicion>=0) {
+			posicion=cadena.indexOf(subcadena,posicion);
+			if(posicion>=0) {
+				contador++;
+				posicion+=subcadena.length();
+			}
+		}
+		return contador;
+	}
+	
+	public static double calculaMediaCadena(String cadena) {
+		
+		String[] numerosCadena=cadena.split(";");
+		int[] numeros=new int[numerosCadena.length];
+		for(int i=0;i<numerosCadena.length;i++) {
+			numeros[i]=Integer.parseInt(numerosCadena[i]);
+		}
+		return calculaMedia(numeros);
+	}
+	
 	public static void main(String[] args) {
 		/*
 		int suma=suma(1,3)+suma(3,4);
@@ -213,14 +238,17 @@ public class ejercicios {
 	
 		int[] numeros= {2,3,4,5,6,1,2};
 		System.out.printf("%.2f",calculaMedia(numeros));
-	*/	
 		
-		//juegoCadenas();
+		
+		juegoCadenas();
 		
 		System.out.println(obtenMaximo(1,4,2,5,6,1,3));
 		System.out.println(obtenMaximo(3,4,1));
 		System.out.println(obtenMaximo());
 		
+		System.out.println(cuantasVeces("cocicondo cocos con chocolate","co"));
+		*/
+		System.out.printf("%.2f",calculaMediaCadena("3;5;2;4;6;6;8"));
 		
 	}
 
