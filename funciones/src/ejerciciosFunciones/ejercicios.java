@@ -64,6 +64,22 @@ public class ejercicios {
 		return primo;
 	}
 	
+	public static int alReves(int numero) {
+		
+		String cadena=numero+"";
+		String nuevaCadena="";
+		for(int i=0;i<cadena.length();i++)
+		{
+			nuevaCadena=cadena.charAt(i)+nuevaCadena;
+		}
+		return Integer.parseInt(nuevaCadena);
+	}
+	
+	public static boolean esEmirp(int numero) {
+		int numeroAlReves=alReves(numero);
+		return esPrimo(numero) && esPrimo(numeroAlReves);
+	}
+	
 	public static void main(String[] args) {
 		/*
 		int suma=suma(1,3)+suma(3,4);
@@ -83,12 +99,22 @@ public class ejercicios {
 		dibujaCuadrado('@',5);
 		*/
 		
-		if(esPrimo(17))
+		if(esPrimo(19))
 		{
 			System.out.println("Es primo");
 		}
 		
-		System.out.println(esPrimo(9)?"Es primo":"No es primo");
+	//	System.out.println(esPrimo(9)?"Es primo":"No es primo");
+		
+		if (esEmirp(19))
+		{
+			System.out.println("Es emirp");
+		}
+		else {
+			System.out.println ("No es emirp");
+		}
+			
+		
 		
 		
 		
