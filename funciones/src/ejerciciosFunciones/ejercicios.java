@@ -80,6 +80,29 @@ public class ejercicios {
 		return esPrimo(numero) && esPrimo(numeroAlReves);
 	}
 	
+	public static int cuantasCifras(int numero) {
+		int contador=1;
+		while(numero/10!=0) {
+			contador++;
+			numero/=10;
+		}
+		return contador;
+	}
+	
+	public static int alReves2(int numero) {
+		int exponente=cuantasCifras(numero)-1;
+		int resultado=0;
+		int resto=0;
+		while(numero/10!=0) {
+			resto=numero%10;
+			numero/=10;
+			resultado+=resto*Math.pow(10, exponente);
+			exponente--;
+		}
+		
+		return resultado+numero;
+	}
+	
 	public static void main(String[] args) {
 		/*
 		int suma=suma(1,3)+suma(3,4);
@@ -106,14 +129,15 @@ public class ejercicios {
 		
 	//	System.out.println(esPrimo(9)?"Es primo":"No es primo");
 		
-		if (esEmirp(19))
+	/*	if (esEmirp(19))
 		{
 			System.out.println("Es emirp");
 		}
 		else {
 			System.out.println ("No es emirp");
 		}
-			
+	*/		
+		System.out.println(alReves2(123));
 		
 		
 		
