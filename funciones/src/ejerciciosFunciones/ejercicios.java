@@ -56,7 +56,7 @@ public class ejercicios {
 	public static boolean esPrimo(int numero)
 	{
 		boolean primo=true;
-		for(int i=2;i<numero && primo;i++)
+		for(int i=2;i<numero/2 && primo;i++)
 		{
 			if(numero%i==0)
 				primo=false;
@@ -65,9 +65,25 @@ public class ejercicios {
 	}
 	
 	public static void main(String[] args) {
-	
+		/*
+		int suma=suma(1,3)+suma(3,4);
+		System.out.println(suma);
 		
-		if(esPrimo(7))
+		longitudEntre("hola",2,8);
+		longitudEntre("Hola que tal?",2,8);
+		
+		if(longitudEntre2("hola",2,8))
+			System.out.println("Sí");
+		if(longitudEntre2("Hola que tal?",2,8))
+			System.out.println("Sí");	
+		*/
+		
+		/*for(char c='a';c<'z';c++)
+			dibujaCuadrado(c,4);
+		dibujaCuadrado('@',5);
+		*/
+		
+		if(esPrimo(17))
 		{
 			System.out.println("Es primo");
 		}
