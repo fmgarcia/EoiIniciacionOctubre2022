@@ -161,6 +161,20 @@ public class ejercicios {
 		
 	}
 	
+	public static int obtenMaximo(int ...numeros) {
+		int maximo;
+		if(numeros.length==0) {
+			maximo=0;
+		}
+		else {	
+			maximo=numeros[0];
+			for(int i=1;i<numeros.length;i++) {
+				maximo=Math.max(maximo, numeros[i]);
+			}
+		}
+		return maximo;
+	}
+	
 	public static void main(String[] args) {
 		/*
 		int suma=suma(1,3)+suma(3,4);
@@ -201,7 +215,11 @@ public class ejercicios {
 		System.out.printf("%.2f",calculaMedia(numeros));
 	*/	
 		
-		juegoCadenas();
+		//juegoCadenas();
+		
+		System.out.println(obtenMaximo(1,4,2,5,6,1,3));
+		System.out.println(obtenMaximo(3,4,1));
+		System.out.println(obtenMaximo());
 		
 		
 	}
