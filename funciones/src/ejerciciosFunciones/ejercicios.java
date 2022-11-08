@@ -200,6 +200,7 @@ public class ejercicios {
 		return calculaMedia(numeros);
 	}
 	
+	//TODO ordenar al revés
 	public static void OrdenaArray(String[] cadenas) {
 		Arrays.sort(cadenas);
 	}
