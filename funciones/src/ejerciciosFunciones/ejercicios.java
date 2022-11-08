@@ -1,5 +1,7 @@
 package ejerciciosFunciones;
 
+import java.util.Random;
+
 public class ejercicios {
 
 	public static void dibujaAsteriscos(int cuantos)
@@ -103,6 +105,26 @@ public class ejercicios {
 		return resultado+numero;
 	}
 	
+	public static double calculaMedia(int[] numeros){
+		
+		int suma=0;
+		if (numeros.length!=0)
+		{
+			for(int i=0;i<numeros.length;i++)
+			{
+				suma+=numeros[i];
+			}
+			return (double)suma/numeros.length;
+		}
+		return 0;
+	}
+	
+	public static String obtenCadena(String[] cadenas) {
+	//	int numero=new Random().nextInt(cadenas.length);
+		
+		return cadenas[new Random().nextInt(cadenas.length)];
+	}
+	
 	public static void main(String[] args) {
 		/*
 		int suma=suma(1,3)+suma(3,4);
@@ -121,26 +143,29 @@ public class ejercicios {
 			dibujaCuadrado(c,4);
 		dibujaCuadrado('@',5);
 		*/
-		
+	/*	
 		if(esPrimo(19))
 		{
 			System.out.println("Es primo");
 		}
 		
-	//	System.out.println(esPrimo(9)?"Es primo":"No es primo");
+		System.out.println(esPrimo(9)?"Es primo":"No es primo");
 		
-	/*	if (esEmirp(19))
+		if (esEmirp(19))
 		{
 			System.out.println("Es emirp");
 		}
 		else {
 			System.out.println ("No es emirp");
 		}
-	*/		
+			
 		System.out.println(alReves2(123));
-		
-		
-		
+	
+		int[] numeros= {2,3,4,5,6,1,2};
+		System.out.printf("%.2f",calculaMedia(numeros));
+	*/	
+		String[] cadenas= {"Hola","Adiós","Me parece bien","No estoy segura","Incorrecto"};
+		System.out.println(obtenCadena(cadenas));
 		
 	}
 

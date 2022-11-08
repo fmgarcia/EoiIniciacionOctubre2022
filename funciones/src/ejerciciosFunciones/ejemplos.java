@@ -32,17 +32,45 @@ public class ejemplos {
 	
 	public static void main(String[] args) {
 		//suma(2,3);
-		int num1=3;
-		int num2=12;
+		//int num1=3;
+		//int num2=12;
 		//suma(num1,num2);
 		//System.out.println(num1);
 		//suma(1,2,3,4,5);
 		//suma(1,2,3);
 		//resta(4,2);
-		int[] array = {1, 2, 3, 4};
-		cambiaValor(array); 
-		System.out.println(Arrays.toString(array));
+		//int[] array = {1, 2, 3, 4};
+		//cambiaValor(array); 
+		//System.out.println(Arrays.toString(array));
 		
+		String s = "Mi perro se llama Comeniños"; 
+		System.out.println(s.indexOf("ome")); // 3 
+		System.out.println(s.indexOf("gato")); // -1
+		
+		s = "Mi perro se llama Comeniños"; 
+		System.out.println(s.contains("ome")); // true 
+		System.out.println(s.contains("gato")); // false
+		
+		s = "Mi perro se llama Comeniños"; 
+		System.out.println(s.startsWith("perro")); // false
+		System.out.println(s.endsWith("niños")); // true
+		
+		s = "Mi perro se llama Comeniños";
+		String s1 = s.replace("m", "t"); 
+		System.out.println(s1); 
+		
+		s = "Mi perro se llama Comeniños"; 
+		String animal = s.substring(3, 8); 
+		System.out.println(animal);
+		
+		int posicion=s.indexOf("llama");
+		
+		String nombre=s.substring(posicion+6);
+		System.out.println(nombre);
+		
+		String[] palabras=s.split(" ");
+		System.out.println(String.join("-",palabras));
+
 		
 
 	}
