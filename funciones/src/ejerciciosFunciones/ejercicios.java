@@ -200,6 +200,10 @@ public class ejercicios {
 		return calculaMedia(numeros);
 	}
 	
+	public static void OrdenaArray(String[] cadenas) {
+		Arrays.sort(cadenas);
+	}
+	
 	public static void main(String[] args) {
 		/*
 		int suma=suma(1,3)+suma(3,4);
@@ -247,9 +251,12 @@ public class ejercicios {
 		System.out.println(obtenMaximo());
 		
 		System.out.println(cuantasVeces("cocicondo cocos con chocolate","co"));
-		*/
-		System.out.printf("%.2f",calculaMediaCadena("3;5;2;4;6;6;8"));
 		
+		System.out.printf("%.2f",calculaMediaCadena("3;5;2;4;6;6;8"));
+		*/
+		String[] cadenas= {"hola","adiós","bien","mal","incorrecto"};
+		OrdenaArray(cadenas);
+		System.out.println(String.join(",", cadenas));
 	}
 
 }
