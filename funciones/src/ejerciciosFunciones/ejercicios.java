@@ -1,6 +1,9 @@
 package ejerciciosFunciones;
 
+import java.util.Arrays;
+import java.util.OptionalDouble;
 import java.util.Random;
+import java.util.Scanner;
 
 public class ejercicios {
 
@@ -119,10 +122,43 @@ public class ejercicios {
 		return 0;
 	}
 	
+	public static double calculaMediaPF(int[] numeros) {
+		
+		OptionalDouble resultado=Arrays.stream(numeros).average();
+		
+		double media=0;
+		if(resultado.isPresent())
+		{
+			media=resultado.getAsDouble();
+		}
+		return media;
+	}
+	
 	public static String obtenCadena(String[] cadenas) {
 	//	int numero=new Random().nextInt(cadenas.length);
 		
 		return cadenas[new Random().nextInt(cadenas.length)];
+	}
+	
+	public static void juegoCadenas() {
+		String[] cadenas= {"Hola","Adiós","bien","mal","Incorrecto"};
+		String cadena=obtenCadena(cadenas);
+		Scanner sc=new Scanner(System.in);
+		String cadenaUsuario="";
+		int intentos=0;
+		while(!cadenaUsuario.equalsIgnoreCase(cadena) && intentos<3) {
+			System.out.print("Adivina la cadena:");
+			cadenaUsuario=sc.nextLine();
+			intentos++;
+		}
+		if(cadenaUsuario.equalsIgnoreCase(cadena)) {
+			System.out.println("Enhorabuena!!");
+		}
+		else
+		{
+			System.out.println("Lo siento la cadena era: "+cadena);
+		}
+		
 	}
 	
 	public static void main(String[] args) {
@@ -164,8 +200,9 @@ public class ejercicios {
 		int[] numeros= {2,3,4,5,6,1,2};
 		System.out.printf("%.2f",calculaMedia(numeros));
 	*/	
-		String[] cadenas= {"Hola","Adiós","Me parece bien","No estoy segura","Incorrecto"};
-		System.out.println(obtenCadena(cadenas));
+		
+		juegoCadenas();
+		
 		
 	}
 
