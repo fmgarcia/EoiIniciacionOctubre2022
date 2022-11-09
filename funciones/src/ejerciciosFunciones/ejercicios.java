@@ -1,5 +1,7 @@
 package ejerciciosFunciones;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.OptionalDouble;
@@ -204,9 +206,93 @@ public class ejercicios {
 	//ordenar al revés. Ejercicio 11
 	// Crea una función que reciba un array de cadenas y te lo devuelva ordenado
 	// alfabéticamente de la ‘z’ a la ‘a’.
-	public static void OrdenaArray(String[] cadenas) {
+	public static void OrdenaArrayDescendente(String[] cadenas) {
 		Arrays.sort(cadenas, Collections.reverseOrder());
 	}
+	
+	// Ejercicio 12.
+	// Crea una función que reciba un array de números y un número. y te devuelva
+	// cuantas veces aparece ese número en el array.
+	public static int numeroApariciones(int[] numeros, int numero) {
+		int apariciones = 0;
+		for(int i=0; i<numeros.length;i++) {
+			if(numeros[i]==numero)
+				apariciones++;
+		}
+		return apariciones;
+	}
+	
+	// Programación funcional
+	public static int ex12(int[] intArr, int n) {
+	      return (int) Arrays.stream(intArr).filter(e->e==n).count();     
+	}
+	
+	public static int ex12b(Integer[] intArr, int n) {
+	      return (int) Arrays.asList(intArr).stream()	    		  	    		  
+	    		  .filter(i -> i==n)
+	    		  .count();	      
+	}
+	
+	/**
+	 * Dado un LocalDate te devuelve un String en formato dd/mm/aaaa
+	 * @param fecha LocalDate pasado
+	 * @return cadena con el formato indicado
+	 */
+	public static String devolverFechaEspanyol(LocalDate fecha) {
+		String cadena = null;
+		cadena = fecha.getDayOfMonth() + "/" + fecha.getMonthValue() + "/" + fecha.getYear();
+		return cadena;
+	}
+	
+	// Crea una función que reciba una fecha en formato dd-mm-yyyy, conviértela a fecha
+	// (LocalDate) utilizando la función subString o split para extraer el día, mes y año, o
+	// usa el DateTimeFormatter, súmale 2 años, 3 meses y 5 días, y muestra la fecha
+	// resultante.
+	
+	public static void ejercicio13(String fechaCadena) {
+		// Obtener dia, mes y año con subString
+		/*
+		int dia = Integer.parseInt(fechaCadena.substring(0,2));
+		int mes = Integer.parseInt(fechaCadena.substring(3,5));
+		int anyo = Integer.parseInt(fechaCadena.substring(6,10));
+		*/
+		// Obtener dia, mes y año con split
+		/*String[] partesCadena = fechaCadena.split("-");
+		int dia = Integer.parseInt(partesCadena[0]);
+		int mes = Integer.parseInt(partesCadena[1]);
+		int anyo = Integer.parseInt(partesCadena[2]);*/
+		
+		//LocalDate fecha = LocalDate.of(anyo, mes, dia);		
+		
+		
+		// Obtener dia, mes y año con DateTimeFormatter
+		//LocalDate fecha = LocalDate.parse(fechaCadena,DateTimeFormatter.ofPattern("dd-M-y"));
+		LocalDate fecha = LocalDate.parse(fechaCadena,DateTimeFormatter.ofPattern("d-M-y"));
+		LocalDate fechaSumada = fecha.plusYears(2).plusMonths(3).plusDays(5);
+		System.out.println(devolverFechaEspanyol(fechaSumada));
+		
+		// Ejercicio en 1 línea
+		// System.out.println(devolverFechaEspanyol(LocalDate.parse(fechaCadena,DateTimeFormatter.ofPattern("d-M-y")).plusYears(2).plusMonths(3).plusDays(5)));
+		
+	}
+	
+	// Ejercicio adicional
+	// Realiza una programa que calcule el salario total que se te queda neto en tu trabajo
+	// Para ello pediremos el sueldo bruto por pantalla al usuario y su fecha de nacimiento (dd/mm/aaaa)
+	// Si tiene entre 18-35 años tiene una deducción de su sueldo de 1000 euros
+	// Si tiene entre 36-64 años tiene una deducción de su sueldo de 5000 euros
+	// Si está jubilado (65 años cumplidos o más) tiene una deducción de 2000 euros
+	// El sueldo neto es lo que cobra una vez que se le aplica la deducción menos un %:
+	// Si gana entre 0-15000 Euros se le resta un 7%
+	// Si gana entre 15001-50000 Euros se le resta un 15%
+	// Si gana +50000 Euros se le resta un 20%
+	
+	public static double calculaNeto(double bruto, LocalDate fechaNacimiento) {
+	
+		
+		return 0;
+	}
+	
 	
 	public static void main(String[] args) {
 		/*
@@ -258,9 +344,23 @@ public class ejercicios {
 		
 		System.out.printf("%.2f",calculaMediaCadena("3;5;2;4;6;6;8"));
 		*/
+		/*
 		String[] cadenas= {"hola","adiós","bien","mal","incorrecto"};
-		OrdenaArray(cadenas);
+		OrdenaArrayDescendente(cadenas);   // ejercicio 11
 		System.out.println(String.join(",", cadenas));
+		*/
+		// Ejercicio 12
+		/*
+		int[] numeros = {1,5,9,1,8,6,5,1,9,4,2};
+		int apariciones = numeroApariciones(numeros, 1);
+		System.out.println("El número aparece " + apariciones + (apariciones==1?" vez":" veces"));
+		System.out.println("El número aparece " + ex12(numeros,1) + (ex12(numeros,1)==1?" vez":" veces"));
+		*/
+		// Ejercicio 13
+		// ejercicio13("27-07-1976");
+		
+		// Ejercicio ampliación
+		
 	}
 
 }
