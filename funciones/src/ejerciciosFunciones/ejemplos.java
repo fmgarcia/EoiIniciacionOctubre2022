@@ -137,7 +137,7 @@ public class ejemplos {
 		System.out.println(String.join("-",palabras));
 		*/
 
-		// Los ejemplos de como utilizar las clases de fechas (LocalDate, LocalTime, LocalDateTime...)
+		// Los ejemplos de como utilizar las clases de fechas (LocalDate, LocalTime, LocalDateTime, ChronoUnit, Period, Duration). No usar Date.
 		ejemplosFechas();
 
 	}

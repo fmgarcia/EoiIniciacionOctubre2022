@@ -1,6 +1,7 @@
 package ejerciciosFunciones;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.OptionalDouble;
 import java.util.Random;
 import java.util.Scanner;
@@ -200,9 +201,11 @@ public class ejercicios {
 		return calculaMedia(numeros);
 	}
 	
-	//TODO ordenar al revés
+	//ordenar al revés. Ejercicio 11
+	// Crea una función que reciba un array de cadenas y te lo devuelva ordenado
+	// alfabéticamente de la ‘z’ a la ‘a’.
 	public static void OrdenaArray(String[] cadenas) {
-		Arrays.sort(cadenas);
+		Arrays.sort(cadenas, Collections.reverseOrder());
 	}
 	
 	public static void main(String[] args) {
