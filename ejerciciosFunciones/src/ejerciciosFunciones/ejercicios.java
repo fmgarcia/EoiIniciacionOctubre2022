@@ -25,6 +25,13 @@ public class ejercicios {
 		return n1+n2;
 	}
 	
+	/**
+	 * Crea una función que reciba un carácter y un número, dibuja un cuadrado usando
+	 * ese carácter cuyo ancho y alto sea igual al número recibido. Prueba la función.
+	 *
+	 * @param c el caracter del que pintará el cuadrado
+	 * @param n el ancho y alto del cuadrado
+	 */	 
 	public static void dibujaCuadrado(char c,int n)
 	{
 		for(int fila=0;fila<n;fila++)
@@ -65,15 +72,23 @@ public class ejercicios {
 	}
 	
 	public static void main(String[] args) {
-	
 		
+		// suma(7,9);  // No da fallo pero no tiene sentido
+		//int sumaValores = suma(7,9);  // int sumaValores = 16;
+		//System.out.println(suma(7,9));  // System.out.println(16);
+		
+		// Ejercicio 3
+		// dibujaCuadrado('*',7);  // pinta un cuadrado de 7X7 asteriscos
+		
+		// Ejercicio 5
+		/*
 		if(esPrimo(7))
 		{
 			System.out.println("Es primo");
 		}
 		
 		System.out.println(esPrimo(9)?"Es primo":"No es primo");
-		
+		*/
 		
 		
 	}

@@ -40,10 +40,8 @@ public class ejemplos {
 		//suma(1,2,3);
 		//resta(4,2);
 		int[] array = {1, 2, 3, 4};
-		cambiaValor(array); 
+		cambiaValor(array); // 1,99,3,4
 		System.out.println(Arrays.toString(array));
-		
-		
 
 	}
 
