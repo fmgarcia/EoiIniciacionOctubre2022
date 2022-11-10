@@ -80,13 +80,24 @@ public class Ejemplos {
 	}
 
 	
-	public static void leerFicheroJava8(String directorio, String nombreArchivo) throws IOException {
-		Files.readAllLines(Paths.get(directorio, nombreArchivo),Charset.defaultCharset())
-		.forEach(l->System.out.println(l));
+	public static void leerFicheroJava8(String directorio, String nombreArchivo) {
+		try {
+			Files.readAllLines(Paths.get(directorio, nombreArchivo),Charset.defaultCharset())
+			.forEach(l->System.out.println(l));
+			System.out.println("hola");
+		} catch (IOException e) {
+			//e.printStackTrace();  // Esta línea saca el mensaje rojo
+			System.out.println("No he podido leer el fichero " + nombreArchivo);
+		}
 	}
 	
-	public static void escribirFicheroJava8(String directorio, String nombreArchivo,String[] lineas) throws IOException {
-		Files.write(Paths.get(directorio, nombreArchivo), Arrays.asList(lineas));
+	public static void escribirFicheroJava8(String directorio, String nombreArchivo,String[] lineas)  {
+		try {
+			Files.write(Paths.get(directorio, nombreArchivo), Arrays.asList(lineas));
+		} catch (IOException e) {
+			//e.printStackTrace();
+			System.out.println("No he podido escribir en el fichero " + nombreArchivo);
+		}
 	}
 	
 	public static void anyadirFicheroJava8(String directorio, String nombreArchivo,String[] lineas) throws IOException {
@@ -101,6 +112,8 @@ public class Ejemplos {
 		
 		
 		// Lectura de ficheros
+		leerFicheroJava8("","funcionesssss.txt");
+		System.out.println("después del error");
 		/*
 		leerFicheroJava8("","funciones.txt");  // para acceder a la carpeta del proyecto
 		leerFicheroJava8("files","hijo.txt");  // para acceder al hijo con ruta relativa
@@ -113,10 +126,11 @@ public class Ejemplos {
 		
 		// Escritura de ficheros
 		// escribirFichero5();
-		
+		/*
 		String[] lineas = {"primera línea","segunda línea","tercera línea"};
 		//escribirFicheroJava8("files","escribir1.txt",lineas);
 		anyadirFicheroJava8("files","escribir1.txt",lineas);
+		*/
 	}
 
 }
