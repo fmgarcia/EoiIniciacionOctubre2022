@@ -1,6 +1,7 @@
 package ejerciciosFunciones;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
@@ -288,9 +289,33 @@ public class ejercicios {
 	// Si gana +50000 Euros se le resta un 20%
 	
 	public static double calculaNeto(double bruto, LocalDate fechaNacimiento) {
-	
+		final int DESCUENTO_MENOR_15000 = 7;
+		final int DESCUENTO_MENOR_50000 = 15;
+		final int DESCUENTO_MAYOR_50000 = 20;
+		double neto=bruto;
+		int anyos = Period.between(fechaNacimiento,LocalDate.now()).getYears();
+		if(anyos<0)
+			return -1;
+		// bloque de las deducciones
+		if(anyos>=18 && anyos<=35) {
+			neto -= 1000;
+		} else if(anyos>=36 && anyos<=64) {
+			neto -= 5000;
+		} else if(anyos>=65) {
+			neto -= 2000;
+		}
+		if(neto<0)
+			return 0;
+		// bloque de restar %
+		if(neto>=0 && neto<=15000) {
+			neto = neto * (1-(DESCUENTO_MENOR_15000/100.0));  // 1-(7/100) = 1-0.07 = 0.93
+		} else if(neto>15000 && neto<=50000) {
+			neto = neto * (1-(DESCUENTO_MENOR_50000/100.0));
+		} else if(neto>50000) {
+			neto = neto * (1-(DESCUENTO_MAYOR_50000/100.0));
+		}
 		
-		return 0;
+		return neto;
 	}
 	
 	
@@ -360,7 +385,10 @@ public class ejercicios {
 		// ejercicio13("27-07-1976");
 		
 		// Ejercicio ampliación
-		
+		double devuelto = calculaNeto(20000, LocalDate.of(2000, 10, 1));
+		System.out.println(devuelto);
+		System.out.println(calculaNeto(20000, LocalDate.of(2080, 10, 1)));
+		System.out.println(calculaNeto(500, LocalDate.of(2000, 10, 1)));
 	}
 
 }
