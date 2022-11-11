@@ -211,6 +211,41 @@ public class Ejercicios {
 		
 		sc.close();
 	}
+	public static void contarPalabras(){
+		int palabras=0;
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Introduzca nombre de fichero:");
+		String nombre=sc.nextLine();
+		String[] lineas=leerFichero(nombre);
+		for(String s:lineas) {
+			palabras+=s.split(" ").length;
+		}
+		System.out.println(palabras);
+		sc.close();
+	}
+	
+	public static void contarPalabrasPF() {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Introduzca nombre de fichero:");
+		String nombre=sc.nextLine();
+		try {
+			System.out.println(Files.lines(Paths.get(nombre)).
+					mapToInt(line->
+							(line.split(" ").length)).sum());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		sc.close();
+	}
+	
+	public static void ejercicio3() {
+		//1.- Leer el fichero--> String[]
+		//2.- Recorrer el array y separar las líneas con el separador ;
+		//3.- La primera parte la guardamos en otro array de strings
+		//4.- La segunda parte la guardamos en un array de doubles
+		//5.- La longitud de ambos arrays sera la misma del array 
+		//     resultante de leer el fichero.
+	}
 	
 
 	public static void main(String[] args) throws IOException {
@@ -220,9 +255,10 @@ public class Ejercicios {
 		//leerFichero3lineas("files","ejercicio3.txt");
 		//ejercicioContarLineas();
 		//lineasEmpiezanPorA();
-		lineasEmpiezanPorAPF();
-		
-		
+		//lineasEmpiezanPorAPF();
+		//contarPalabras();
+		contarPalabrasPF();
+				
 	}
 
 }
