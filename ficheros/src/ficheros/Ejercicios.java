@@ -238,15 +238,137 @@ public class Ejercicios {
 		sc.close();
 	}
 	
-	public static void ejercicio3() {
-		//1.- Leer el fichero--> String[]
-		//2.- Recorrer el array y separar las líneas con el separador ;
-		//3.- La primera parte la guardamos en otro array de strings
-		//4.- La segunda parte la guardamos en un array de doubles
-		//5.- La longitud de ambos arrays sera la misma del array 
-		//     resultante de leer el fichero.
+	public static double calculaMedia(double[] notas) {
+		double media=0;
+		for(double n:notas) {
+			media+=n;
+		}
+		media/=notas.length;
+		return media;
 	}
 	
+	public static int calculaMaximo(double[] notas) {
+		double maximo=notas[0];
+		int posicionMaximo=0;
+		for(int i=0;i<notas.length;i++) {
+			if(notas[i]>maximo) {
+				maximo=notas[i];
+				posicionMaximo=i;
+			}
+		}
+		return posicionMaximo;
+	}
+	public static int calculaMinimo(double[] notas) {
+		double minimo=notas[0];
+		int posicionMinimo=0;
+		for(int i=0;i<notas.length;i++) {
+			if(notas[i]<minimo) {
+				minimo=notas[i];
+				posicionMinimo=i;
+			}
+		}
+		return posicionMinimo;
+	}
+	
+	public static void ejercicio3() {
+		//1.- Leer el fichero--> String[]
+		//2.- Creamos 2 arrays de la misma longitud del resultante de
+		// leer el fichero uno llamado nombres otro notas
+		//3.- Recorrer el array y separar las líneas con el separador ;
+		//4.- La primera parte la guardamos en otro array de strings
+		//5.- La segunda parte la guardamos en un array de doubles
+		
+		
+		try {
+			String[] lineas=
+					Files.readAllLines(Paths.get("alumnos.txt"),Charset.defaultCharset())
+					.stream().toArray(String[]::new);
+			
+			String[] nombres=new String[lineas.length];
+			double[] notas=new double[lineas.length];
+			for(int i=0;i<lineas.length;i++) {
+				nombres[i]=lineas[i].split(";")[0];
+				notas[i]=Double.parseDouble(lineas[i].split(";")[1]);		
+			}
+			double media=calculaMedia(notas);
+			int posicionMaximo=calculaMaximo(notas);
+			int posicionMinimo=calculaMinimo(notas);
+			
+			System.out.printf("Media: %.2f,\nMaximo:%s "
+					+ "con nota:%.2f\nMínimo:%s con nota:%.2f",
+					media,nombres[posicionMaximo],notas[posicionMaximo],
+					nombres[posicionMinimo],notas[posicionMinimo]);
+				
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+
+	}
+	
+	public static void muestraMenu() {
+		System.out.println();
+		System.out.println("\t1.-Mostrar productos");
+		System.out.println("\t2.-Añadir producto");
+		System.out.println("\t0.-Salir");
+		System.out.println();
+	}
+	
+	public static int leeOpcion() {
+		int opcion=0;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Introduzca opcion:");
+		opcion=sc.nextInt();
+		return opcion;
+	}
+	
+	public static void mostrarProductos() {
+		String[] lineas=leerFichero("productos.txt");
+		for(String s:lineas) {
+			System.out.printf("\t%-15s %6.2f\n",s.split(";")[0],
+					Double.parseDouble(s.split(";")[1]));
+		}
+	}
+	
+	public static void addProducto() {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Introduzca nombre de producto:");
+		String nombre=sc.next();
+		System.out.print("Introduzca el precio:");
+		double precio=sc.nextDouble();
+		
+		try {
+			Files.write(Paths.get("productos.txt"), 
+					Arrays.asList(nombre+";"+precio),StandardOpenOption.APPEND);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void ejercicio4() {
+		int opcion=3;
+		while(opcion!=0) {
+			muestraMenu();
+			opcion=leeOpcion();
+			switch(opcion) {
+			case 1:
+				mostrarProductos();
+				break;
+			case 2:
+				addProducto();
+				break;
+			case 0:
+				break;
+			default:
+				System.out.println("Opción incorrecta");
+			}
+		}
+		
+		
+		
+		
+		
+		
+	}
 
 	public static void main(String[] args) throws IOException {
 		//ejercicio1();
@@ -257,7 +379,9 @@ public class Ejercicios {
 		//lineasEmpiezanPorA();
 		//lineasEmpiezanPorAPF();
 		//contarPalabras();
-		contarPalabrasPF();
+		//contarPalabrasPF();
+		//ejercicio3();
+		ejercicio4();
 				
 	}
 

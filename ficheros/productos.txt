@@ -1,0 +1,6 @@
+naranjas;10.4
+pomelos;11.3
+mandarinas;9.2
+ciruelas;9.5
+limones;2.1
+melón;12.22
