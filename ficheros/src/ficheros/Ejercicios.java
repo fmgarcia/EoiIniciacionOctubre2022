@@ -1,8 +1,10 @@
 package ficheros;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
@@ -20,8 +22,8 @@ public class Ejercicios {
 	}
 	
 	public static void almacenarLineasJava8(String directorio, String nombreArchivo) throws IOException {
-		String[] lineas = Files.readAllLines(Paths.get(directorio, nombreArchivo),Charset.defaultCharset())
-				.stream().toArray(String[]::new);  // String[] lineas = {"10",50","40","28","9","16"};
+		String[] lineas = Files.readAllLines(Paths.get(directorio, nombreArchivo),
+						Charset.defaultCharset()).stream().toArray(String[]::new);  // String[] lineas = {"10",50","40","28","9","16"};
 		
 		for(String linea : lineas)
 			System.out.println(linea);
@@ -92,11 +94,135 @@ public class Ejercicios {
 		}while(!linea.toUpperCase().equals("FIN"));				
 		sc.close();
 	}
+	
+	public static void leerFichero3lineas(String path,String file)
+	{
+		
+		try {
+			/*String[] lineas = Files.readAllLines(Paths.get(path, file),Charset.defaultCharset())
+					.stream().toArray(String[]::new);*/
+			
+			String[] lineas =Files.readAllLines(Paths.get(path, file),Charset.defaultCharset())
+					.stream().limit(3).toArray(String[]::new);
+			
+			/*for(int i=0;i<3;i++) {
+				System.out.println(lineas[i]);
+			  }
+				*/
+			for(int i=0;i<lineas.length;i++) {
+				System.out.println(lineas[i]);
+			}		
+		}catch(NoSuchFileException e) {
+			System.out.println("Fichero no existe");
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	public static int cuentaLineas(String nombre) {
+		String[] lineas=null;
+		try {
+		File f=new File(nombre);
+		if(f.exists()) {
+			lineas = Files.readAllLines(Paths.get(nombre),Charset.defaultCharset())
+					.stream().toArray(String[]::new);
+			return lineas.length;
+		}
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public static long cuentaLineasPF(String nombre) {
+		int numeroDeLineas;
+		try {
+		File f=new File(nombre);
+		if(f.exists()) {
+			return Files.lines(Paths.get(nombre)).count();
+		}
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
+	public static void ejercicioContarLineas()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Introduzca nombre de fichero:");
+		String nombre=sc.nextLine();
+		System.out.println(cuentaLineas(nombre));
+		System.out.println(cuentaLineasPF(nombre));
+		sc.close();
+	}
+	
+	public static String[] leerFichero(String nombre) {
+		try {
+			return Files.readAllLines(Paths.get(nombre),Charset.defaultCharset())
+					.stream().toArray(String[]::new);
+		}catch (NoSuchFileException e) {
+			return new String[0];
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static void lineasEmpiezanPorA()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Introduzca nombre de fichero:");
+		String nombre=sc.nextLine();
+		String[] lineas=leerFichero(nombre);
+		if(lineas.length>0) {
+			for(int i=0;i<lineas.length;i++){
+				if(lineas[i].startsWith("a") || lineas[i].startsWith("A")) {
+					System.out.println(i+1+": "+lineas[i]);
+				}
+			}
+		}
+		sc.close();
+	}
+	
+	public static void lineasEmpiezanPorAPF()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Introduzca nombre de fichero:");
+		String nombre=sc.nextLine();
+		try {
+			Files.lines(Paths.get(nombre)).filter(line-> 
+					line.startsWith("a") || line.startsWith("A")).
+					forEach(System.out::println);
+		} catch (NoSuchFileException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+			
+		
+		sc.close();
+	}
+	
 
 	public static void main(String[] args) throws IOException {
 		//ejercicio1();
 		//ejercicio2("files", "ejercicio2.txt");
-		ejercicio2b("files", "ejercicio2.txt");
+		//ejercicio2b("files", "ejercicio2.txt");
+		//leerFichero3lineas("files","ejercicio3.txt");
+		//ejercicioContarLineas();
+		//lineasEmpiezanPorA();
+		lineasEmpiezanPorAPF();
+		
+		
 	}
 
 }

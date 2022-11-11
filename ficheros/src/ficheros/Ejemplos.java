@@ -104,6 +104,34 @@ public class Ejemplos {
 		Files.write(Paths.get(directorio, nombreArchivo), Arrays.asList(lineas),StandardOpenOption.APPEND);
 	}
 	
+	public static void ejemploExcepciones()
+	{
+		int a = 0;
+		try {
+			int b = 2 / a;
+		}
+		catch(ArithmeticException e)
+		{
+			System.out.println("Error en la división");
+		}
+		catch(Exception e) {
+			System.out.println("Error general");
+		}
+		
+		
+		System.out.println("Instrucción después del error");
+	}
+	
+	public static void saludar(String nombre) {
+		if(nombre == null) {
+			throw new NullPointerException("El nombre no puede ser nulo");
+		} 
+		System.out.println("Hola "+ nombre);
+		
+		
+	}
+
+	
 	
 	public static void main(String[] args) throws IOException {
 		//leerFicheroJava5();
@@ -112,9 +140,9 @@ public class Ejemplos {
 		
 		
 		// Lectura de ficheros
-		leerFicheroJava8("","funcionesssss.txt");
+		/*leerFicheroJava8("","funcionesssss.txt");
 		System.out.println("después del error");
-		/*
+		
 		leerFicheroJava8("","funciones.txt");  // para acceder a la carpeta del proyecto
 		leerFicheroJava8("files","hijo.txt");  // para acceder al hijo con ruta relativa
 		leerFicheroJava8("..","padre.txt");  // para acceder al padre con ruta relativa
@@ -131,6 +159,15 @@ public class Ejemplos {
 		//escribirFicheroJava8("files","escribir1.txt",lineas);
 		anyadirFicheroJava8("files","escribir1.txt",lineas);
 		*/
+		
+		//ejemploExcepciones();
+		
+		try {
+			saludar(null);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
