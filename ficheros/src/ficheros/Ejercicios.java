@@ -362,14 +362,45 @@ public class Ejercicios {
 				System.out.println("Opción incorrecta");
 			}
 		}
-		
-		
-		
-		
+
+	}
+	public static void ejercicio5() {
+		Scanner sc=new Scanner(System.in);
+		String[] palabras=leerFichero("palabras.txt");
+		String palabraElegida=palabras[(int)(Math.random()*palabras.length)];
+		System.out.println(palabraElegida);
+		String palabraUsuario="";
+		int intentos=3;
+		while(!palabraUsuario.equals(palabraElegida) && intentos>0) {
+			System.out.print("Intenta adivinar la palabra:");
+			palabraUsuario=sc.nextLine();
+			intentos--;
+		}
+		System.out.println(intentos==0 && !palabraUsuario.equals(palabraElegida)?
+				"Lo siento no has acertado":"Enhorabuena has hacertado");
+	}
+
+	public static void ejercicio7() {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Nombre del fichero a mostrar:");
+		String nombre=sc.nextLine();
+		String[] lineas=null;
+		try {
+			lineas=Files.readAllLines(Paths.get(nombre),Charset.defaultCharset())
+					.stream().toArray(String[]::new);
+			for(String s:lineas) {
+				System.out.println(s);
+			}
+		}catch (NoSuchFileException e) {
+			System.out.println("Error: no existe el fichero");
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		
 	}
-
+	
 	public static void main(String[] args) throws IOException {
 		//ejercicio1();
 		//ejercicio2("files", "ejercicio2.txt");
@@ -381,7 +412,9 @@ public class Ejercicios {
 		//contarPalabras();
 		//contarPalabrasPF();
 		//ejercicio3();
-		ejercicio4();
+		//ejercicio4();
+		//ejercicio5();
+		ejercicio7();
 				
 	}
 
