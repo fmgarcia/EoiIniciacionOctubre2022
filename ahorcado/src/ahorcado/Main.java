@@ -50,23 +50,30 @@ public class Main {
 		}
 	}
 	
-	public static boolean leeFichero(String fichero,String[] palabras) {
+	public static String[] leeFichero(String fichero) {
 		try {
-			palabras=Files.readAllLines(Paths.get(fichero),Charset.defaultCharset()).
+			return Files.readAllLines(Paths.get(fichero),Charset.defaultCharset()).
 					stream().toArray(String[]::new);
 		} catch (NoSuchFileException e) {
 			System.out.println("No hay palabras con las que jugar, introduzca algunas primero.");
-			return false;
 		}
 		catch (IOException e) {
 			// TODO Bloque catch generado automáticamente
 			e.printStackTrace();
-			return false;
+			
 		}
-		return true;
+		return null;
 	}
 	public static String eligePalabra(String[] palabras) {
 		return palabras[(int)(Math.random()*palabras.length)];
+	}
+	
+	public static String dibujaPalabra(String palabra) {
+		String resultado="";
+		for(int i=0;i<palabra.length();i++) {
+			resultado+="-";
+		}
+		return resultado;
 	}
 	
 	public static void jugar(String fichero) {
@@ -74,18 +81,18 @@ public class Main {
 		String palabraElegida,palabraDibujo;
 		int vidas=6;
 		String[] palabras=null;
-		seguir=leeFichero(fichero,palabras);
-		while(seguir) {
+		palabras=leeFichero(fichero);
+		seguir=palabras.length>0;
+		//while(seguir) {
 			palabraElegida=eligePalabra(palabras);
+			System.out.println(palabraElegida);
 			palabraDibujo=dibujaPalabra(palabraElegida);
-			  // rellenar _ _ _ _ una barra por cada letra de la 
-			  // palabra elegida.
-			while(vidas>0 && !ganado) {
-				
+		//	while(vidas>0 && !ganado) {
+				System.out.println(palabraDibujo);
 				System.out.print("Introduzca una letra:");
-			}
+		//	}
 		
-		}
+	//	}
 		
 		
 	}
