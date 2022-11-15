@@ -76,27 +76,79 @@ public class Main {
 		return resultado;
 	}
 	
+	public static String rellenaPalabra(String palabraElegida,char letra,String palabraDibujo) {		
+		String resultado="";
+		for(int i=0;i<palabraDibujo.length();i++) {
+			if(palabraElegida.charAt(i)==letra) {
+				resultado+=letra;
+			}
+			else {
+				resultado+=palabraDibujo.charAt(i);
+			}
+		}
+		return resultado;
+		
+	}
+	public static void dibujaAhorcado(int vidas) {
+		if(vidas<=5) {
+			System.out.println("\t\t\t O");
+		}
+		if(vidas==4) {
+			System.out.println("\t\t\t |");
+		}
+		else if(vidas==3) {
+			System.out.println("\t\t\t/|");
+		}
+		else if (vidas<=2) {
+			System.out.println("\t\t\t/|\\");
+		}
+		if(vidas==1) {
+			System.out.println("\t\t\t/");
+		}
+		else if(vidas==0) {
+			System.out.println("\t\t\t/ \\");
+		}
+	}
+	
 	public static void jugar(String fichero) {
+		Scanner sc=new Scanner(System.in);
 		boolean seguir=true,ganado=false;
 		String palabraElegida,palabraDibujo;
+		String seguirJugando;
+		char letra;
 		int vidas=6;
 		String[] palabras=null;
 		palabras=leeFichero(fichero);
 		seguir=palabras.length>0;
-		//while(seguir) {
+		while(seguir) {
+			vidas=6;
+			ganado=false;
 			palabraElegida=eligePalabra(palabras);
-			System.out.println(palabraElegida);
+			//System.out.println(palabraElegida);
 			palabraDibujo=dibujaPalabra(palabraElegida);
-		//	while(vidas>0 && !ganado) {
+			while(vidas>0 && !ganado) {
 				System.out.println(palabraDibujo);
 				System.out.print("Introduzca una letra:");
-		//	}
-		
-	//	}
+				letra=sc.next().charAt(0);
+				if(palabraElegida.contains(letra+"")) {
+					palabraDibujo=rellenaPalabra(palabraElegida,letra,palabraDibujo);					
+				}
+				else {
+					vidas--;
+				}
+				if(palabraElegida.equalsIgnoreCase(palabraDibujo)) {
+					ganado=true;
+					System.out.println("Enhorabuena has acertado la palabra: " + palabraDibujo);				
+				}
+				dibujaAhorcado(vidas);
+			}
+			System.out.print("¿Desea jugar otra partida? (S/N)");
+			seguirJugando=sc.next();
+			seguir=seguirJugando.equalsIgnoreCase("S");
+		}
 		
 		
 	}
-	
 	
 	public static void main(String[] args) {
 		
@@ -108,10 +160,6 @@ public class Main {
 			switch(opcion) {
 			case 1:
 				addPalabras("palabras.txt");
-				// Añadir al fichero pasado como parámetro todas las palabras
-				// que le iremos pidiendo al usuario hasta que introduzca una
-				// vacía. Le de enter. Si el fichero no existe, se debe crear
-				// si sí existe se añade al final.
 				break;
 			case 2:
 				jugar("palabras.txt");

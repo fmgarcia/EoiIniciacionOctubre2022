@@ -2,3 +2,5 @@ buganvilla
 morera
 columpio
 monitor
+teclado
+boligrafo
