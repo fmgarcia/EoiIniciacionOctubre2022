@@ -113,7 +113,7 @@ public class Main {
 	public static void jugar(String fichero) {
 		Scanner sc=new Scanner(System.in);
 		boolean seguir=true,ganado=false;
-		String palabraElegida,palabraDibujo;
+		String palabraElegida,palabraDibujo,letrasFalladas="";
 		String seguirJugando;
 		char letra;
 		int vidas=6;
@@ -134,6 +134,7 @@ public class Main {
 					palabraDibujo=rellenaPalabra(palabraElegida,letra,palabraDibujo);					
 				}
 				else {
+					letrasFalladas+=letra+" ";
 					vidas--;
 				}
 				if(palabraElegida.equalsIgnoreCase(palabraDibujo)) {
@@ -141,7 +142,10 @@ public class Main {
 					System.out.println("Enhorabuena has acertado la palabra: " + palabraDibujo);				
 				}
 				dibujaAhorcado(vidas);
+				System.out.println("\n\t\t\t"+letrasFalladas);
 			}
+			if(vidas==0)
+				System.out.println("¡Lo siento! La palabra era:"+palabraElegida);
 			System.out.print("¿Desea jugar otra partida? (S/N)");
 			seguirJugando=sc.next();
 			seguir=seguirJugando.equalsIgnoreCase("S");
@@ -166,6 +170,7 @@ public class Main {
 				break;
 			case 3:
 				salir=true;
+				System.out.println("¡Adiós!");
 				break;
 			}
 			
