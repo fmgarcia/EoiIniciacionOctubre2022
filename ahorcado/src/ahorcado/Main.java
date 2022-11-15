@@ -145,7 +145,7 @@ public class Main {
 				System.out.println("\n\t\t\t"+letrasFalladas);
 			}
 			if(vidas==0)
-				System.out.println("¡Lo siento! La palabra era:"+palabraElegida);
+				System.out.println("¡Lo siento! La palabra era: "+palabraElegida);
 			System.out.print("¿Desea jugar otra partida? (S/N)");
 			seguirJugando=sc.next();
 			seguir=seguirJugando.equalsIgnoreCase("S");
