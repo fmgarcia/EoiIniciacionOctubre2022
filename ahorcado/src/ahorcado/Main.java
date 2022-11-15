@@ -12,6 +12,7 @@ public class Main {
 		System.out.println("2.- Jugar");
 		System.out.println("3.- Salir");
 		System.out.println();
+		System.out.println("Introduzca la opción:");
 		opcion=sc.nextInt();
 		return opcion;
 		
