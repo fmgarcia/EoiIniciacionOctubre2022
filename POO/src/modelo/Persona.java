@@ -5,6 +5,23 @@ public class Persona {
 	private String dni;
 	private int edad;
 	
+	public Persona() {
+		this.nombre="";
+		this.dni="";
+		this.edad=0;
+	}
+	
+	public Persona(String nombre) {
+		this.nombre=nombre;
+	}
+	
+	public Persona(String nombre,String dni,int edad) {
+		this.nombre=nombre;
+		this.dni=dni;
+		this.edad=edad;
+	}
+	
+	
 	public String getNombre()
 	{
 		return nombre;
@@ -26,7 +43,8 @@ public class Persona {
 	}
 
 	public void setEdad(int edad) {
-		this.edad = edad;
+		if(edad>=0)
+			this.edad = edad;
 	}
 	
 	
