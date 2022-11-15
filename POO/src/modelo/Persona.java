@@ -21,6 +21,12 @@ public class Persona {
 		this.edad=edad;
 	}
 	
+	public Persona(Persona p) {
+		this.nombre=p.nombre;
+		this.dni=p.dni;
+		this.edad=p.edad;
+	}
+	
 	
 	public String getNombre()
 	{
@@ -45,6 +51,19 @@ public class Persona {
 	public void setEdad(int edad) {
 		if(edad>=0)
 			this.edad = edad;
+	}
+	
+	public void saluda() {
+		System.out.printf("%s tiene %d años\n",
+				nombre,edad);
+	}
+	
+	public static Persona[] copiaArray(Persona[] personas) {
+		Persona[] otrasPersonas=new Persona[personas.length];
+		for(int i=0;i<personas.length;i++) {
+			otrasPersonas[i]=new Persona(personas[i]);
+		}
+		return otrasPersonas;
 	}
 	
 	

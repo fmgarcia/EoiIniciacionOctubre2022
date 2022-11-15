@@ -31,6 +31,12 @@ public class Cuadrado {
 		return lado*lado;
 	}
 	
+	public static void CalcularArea() {
+		
+		System.out.println(
+				"El área de un cuadrado es lado por lado");
+	}
+	
 	
 
 }

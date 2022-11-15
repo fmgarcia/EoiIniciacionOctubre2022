@@ -3,15 +3,19 @@ package modelo;
 public class Producto {
 	String nombre;
 	double precio;
+	public static int productosCreados=0;
 	
 	public Producto(String nombre,double precio) {
 		this.nombre=nombre;
 		this.precio=precio;
+		productosCreados++;
+		
 	}
 	
 	public Producto(Producto p) {
 		this.nombre=p.nombre;
 		this.precio=p.precio;
+		productosCreados++;
 		
 	}
 
