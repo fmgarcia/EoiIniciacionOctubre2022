@@ -47,7 +47,7 @@ public class Mesa {
 	
 	@Override
 	public String toString() {
-		return "Mesa de "+material+" de "+altura+"m de altura y"+
+		return "Mesa de "+material+" de "+altura+"m de altura y "+
 				anchura+"m de anchura y pata de "+pata.toString();	
 	}
 
