@@ -1,5 +1,8 @@
 package poo2;
 
+import modelo.Direccion;
+import modelo.Empleado;
+import modelo.Empresa;
 import modelo.Persona;
 import modelo.TiendaLicores;
 
@@ -30,10 +33,21 @@ public class ejercicios {
 		
 		
 	}
+	
+	public static void ejercicio4() {
+		Empresa empresa=new Empresa("Mari Chelo's",
+				new Direccion("mateo el sabio",3),5);
+		
+		empresa.contrataEmpleado(new Empleado("Jesús",3000));
+		empresa.contrataEmpleado(new Empleado("Mario",2000));
+		empresa.contrataEmpleado(new Empleado("Lucía",5000));
+		
+	}
 
 	public static void main(String[] args) {
-		ejercicio1y2();
-		ejercicio3();
+		//ejercicio1y2();
+		//ejercicio3();
+		ejercicio4();
 		
 	}
 
