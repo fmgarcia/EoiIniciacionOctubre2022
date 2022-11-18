@@ -61,9 +61,21 @@ public class Persona {
 	public static Persona[] copiaArray(Persona[] personas) {
 		Persona[] otrasPersonas=new Persona[personas.length];
 		for(int i=0;i<personas.length;i++) {
-			otrasPersonas[i]=new Persona(personas[i]);
+			if(personas[i]==null)
+				otrasPersonas[i]=null;
+			else
+				otrasPersonas[i]=new Persona(personas[i]);
 		}
 		return otrasPersonas;
+	}
+	
+	public boolean estoyEnArray(Persona[] personas) {
+		boolean encontrado=false;
+		for(int i=0;i<personas.length && !encontrado;i++) {
+			if(this==personas[i])
+				encontrado=true;			
+		}
+		return encontrado;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package main;
 
+import modelo.Empresa;
 import modelo.Persona;
 
 public class ejercicios {
@@ -36,14 +37,30 @@ public class ejercicios {
 			personas[i].saluda();
 			personas2[i].saluda();
 		}
+		Persona prueba=personas[0];
+		prueba=new Persona();
+		
+		System.out.println(prueba.estoyEnArray(personas));
 		
 		
 	}
 	
+	public static void ejerciciosEmpresa() {
+		Empresa miEmpresa=new Empresa("Mari Chelo's");
+		System.out.println("He creado la empresa "+ 
+							miEmpresa.getNombre());
+		Persona unaPersona=new Persona("Rafael","343434",34);
+		miEmpresa.contrataEmpleado(unaPersona);
+		miEmpresa.contrataEmpleado(
+				new Persona("María","88787",24));
+		miEmpresa.mostrarEmpleados();
+	}
 
 	public static void main(String[] args) {
 		//ejercicio12y3();
-		ejercicio4y5();
+		//ejercicio4y5();
+		ejerciciosEmpresa();
+		
 		
 
 	}
