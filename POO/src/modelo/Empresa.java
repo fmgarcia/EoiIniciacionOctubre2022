@@ -34,5 +34,24 @@ public class Empresa {
 								+":"+empleados[i].getDni());
 		}
 	}
+	
+	public void despideEmpleado(int posicion) {
+		for(int i=posicion;i<numEmpleados-1;i++) {
+			empleados[i]=empleados[i+1];
+		}
+		numEmpleados--;
+	}
+	
+	public void despideEmpleado(String nombre) {
+		boolean encontrado=false;
+		int posicion=0;
+		for(int i=0;i<numEmpleados && !encontrado;i++) {
+			if(empleados[i].getNombre().equals(nombre)){
+				encontrado=true;
+				posicion=i;
+			}
+		}
+		despideEmpleado(posicion);
+	}
 
 }

@@ -53,6 +53,10 @@ public class ejercicios {
 		miEmpresa.contrataEmpleado(unaPersona);
 		miEmpresa.contrataEmpleado(
 				new Persona("María","88787",24));
+		miEmpresa.contrataEmpleado(new Persona("Lola","999",34));
+		miEmpresa.mostrarEmpleados();
+		
+		miEmpresa.despideEmpleado("Lola");
 		miEmpresa.mostrarEmpleados();
 	}
 
