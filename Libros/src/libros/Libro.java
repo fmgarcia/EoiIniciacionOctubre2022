@@ -53,6 +53,31 @@ public class Libro {
 		this.ejemplaresPrestados = ejemplaresPrestados;
 	}
 	
+	public boolean prestamo() {
+		boolean resultado=false;
+		if(ejemplares>ejemplaresPrestados)
+		{
+			ejemplaresPrestados++;
+			resultado=true;
+		}
+		return resultado;
+	}
+	
+	public boolean devolucion() {
+		boolean resultado=false;
+		if(ejemplaresPrestados>0) {
+			ejemplaresPrestados--;
+			resultado=true;
+		}
+		return resultado;
+	}
+
+	@Override
+	public String toString() {
+		return "Libro [titulo=" + titulo + ", autor=" + autor + ", ejemplares=" + ejemplares + ", ejemplaresPrestados="
+				+ ejemplaresPrestados + "]";
+	}
+	
 	
 
 }
