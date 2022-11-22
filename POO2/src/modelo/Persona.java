@@ -1,7 +1,5 @@
 package modelo;
 
-import poo2.IHablador;
-
 public class Persona implements IHablador{
 	private String nombre;
 	private String dni;

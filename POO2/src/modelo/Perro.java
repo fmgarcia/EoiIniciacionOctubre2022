@@ -1,7 +1,5 @@
 package modelo;
 
-import poo2.IHablador;
-
 public class Perro extends Mamifero {
 	String raza;
 	

@@ -1,4 +1,4 @@
-package poo2;
+package modelo;
 
 public interface IHablador {
 	void hablar();

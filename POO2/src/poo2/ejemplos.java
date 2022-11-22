@@ -3,6 +3,7 @@ package poo2;
 import modelo.Animal;
 import modelo.Ave;
 import modelo.Gallina;
+import modelo.IHablador;
 import modelo.Mamifero;
 import modelo.Perro;
 import modelo.Persona;
