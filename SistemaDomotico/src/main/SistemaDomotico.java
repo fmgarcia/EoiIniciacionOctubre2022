@@ -7,16 +7,18 @@ import modelo.Calefaccion;
 import modelo.Dispositivo;
 import modelo.Horno;
 import modelo.IEncenderApagar;
+import modelo.ISubirBajar;
 import modelo.Luz;
 import modelo.Persiana;
 import modelo.Puerta;
 import modelo.PuertaDeGaraje;
+import modelo.Toldo;
 import modelo.Ventana;
 
 public class SistemaDomotico {
 
 	public static Dispositivo[] rellenaDispositivos() {
-		Dispositivo[] dispositivos=new Dispositivo[9];
+		Dispositivo[] dispositivos=new Dispositivo[10];
 		dispositivos[0]=new Ventana(new Persiana(10));
 		dispositivos[0].setNombre("Ventana comedor 1");
 		((Ventana)dispositivos[0]).
@@ -29,6 +31,7 @@ public class SistemaDomotico {
 		dispositivos[2].setNombre("Puerta de entrada");
 		dispositivos[3]=new PuertaDeGaraje(false);
 		dispositivos[3].setNombre("Puerta del garaje");
+		((PuertaDeGaraje)dispositivos[3]).subir();
 		dispositivos[4]=new Luz(true);
 		dispositivos[4].setNombre("Luz del comedor");
 		dispositivos[5]=new Calefaccion(24);
@@ -39,6 +42,8 @@ public class SistemaDomotico {
 		dispositivos[7].setNombre("Aspirador");
 		dispositivos[8]=new Calefaccion(20);
 		dispositivos[8].setNombre("Calefaccion dormitorio");
+		dispositivos[9]=new Toldo(20);
+		dispositivos[9].setNombre("Toldo comedor");
 		return dispositivos;
 		
 		
@@ -51,10 +56,12 @@ public class SistemaDomotico {
 		System.out.println("3.- Encender las calefacciones y ponerlas a 23 grados");
 		System.out.println("4.- Bloquear todas la puertas");
 		System.out.println("5.- Mostrar dispositivos");
+		System.out.println("6.- Bajar todo");
+		System.out.println("7.- Encender aspiradores");
 		System.out.println("S.- Salir");
 		System.out.println();
 		System.out.print("Introduzca una opcion:");
-		return sc.next();
+		return sc.next().toUpperCase();
 		
 		
 	}
@@ -91,6 +98,36 @@ public class SistemaDomotico {
 		}
 	}
 	
+	public static void bloquearTodasLasPuertas(Dispositivo[] dispositivos) {
+		for(Dispositivo d:dispositivos) {
+			if(d instanceof Puerta &&
+					!(d instanceof PuertaDeGaraje)) {
+				((Puerta)d).bloquear();
+			}
+		}
+	}
+	
+	public static void bajarTodo(Dispositivo[] dispositivos) {
+		for(Dispositivo d: dispositivos) {
+			if(d instanceof ISubirBajar) {
+				((ISubirBajar)d).bajar();
+			}
+			else if(d instanceof Ventana) {
+				((Ventana)d).getPersiana().bajar();
+			}
+		}
+	}
+	public static void encenderAspirador(Dispositivo[] dispositivos) {
+		for(Dispositivo d: dispositivos) {
+			if(d instanceof Aspirador) {
+				if(((Aspirador)d).getBateria()>=50) {
+					((Aspirador)d).encender();
+				}
+			}
+		}
+	
+	}
+	
 	public static void main(String[] args) {
 		Dispositivo[] dispositivos=rellenaDispositivos();
 		String opcion;
@@ -106,8 +143,16 @@ public class SistemaDomotico {
 				break;
 			case "3":
 				encenderCalefaccion(dispositivos);
+			case "4":
+				bloquearTodasLasPuertas(dispositivos);
 			case "5":
 				mostrarDispositivos(dispositivos);
+				break;
+			case "6":
+				bajarTodo(dispositivos);
+				break;
+			case "7":
+				encenderAspirador(dispositivos);
 				break;
 			case "S":
 				salir=true;

@@ -18,7 +18,11 @@ public class Aspirador extends Dispositivo implements IEncenderApagar{
 	}
 	
 	public void encender() {
-		estado=true;
+		if(bateria-10>0)
+		{
+			estado=true;
+			bateria-=10;
+		}
 	}
 	public void apagar() {
 		estado=false;
