@@ -1,6 +1,6 @@
 package modelo;
 
-public class Mamifero extends Animal{
+public abstract class  Mamifero extends Animal{
 	private boolean carnivoro;
 	
 	public Mamifero(String nombre, double peso, boolean carnivoro) { 

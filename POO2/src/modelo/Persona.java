@@ -1,6 +1,8 @@
 package modelo;
 
-public class Persona {
+import poo2.IHablador;
+
+public class Persona implements IHablador{
 	private String nombre;
 	private String dni;
 	private int edad;
@@ -104,6 +106,10 @@ public class Persona {
 		} else if (!dni.equals(other.dni))
 			return false;
 		return true;
+	}
+	
+	public void hablar() {
+		System.out.println("Hola");
 	}
 	
 	

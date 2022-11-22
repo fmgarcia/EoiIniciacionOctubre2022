@@ -1,8 +1,11 @@
 package poo2;
 
+import modelo.Circulo;
+import modelo.Cuadrado;
 import modelo.Direccion;
 import modelo.Empleado;
 import modelo.Empresa;
+import modelo.Figura;
 import modelo.Persona;
 import modelo.TiendaLicores;
 
@@ -59,11 +62,22 @@ public class ejercicios {
 		
 		
 	}
+	
+	public static void ejercicio5() {
+		Figura[] figuras=new Figura[3];
+		figuras[0]=new Circulo(2.4);
+		figuras[1]=new Cuadrado(2.3);
+		figuras[2]=new Cuadrado(4.7);
+		for(Figura f:figuras) {
+			System.out.println(f.getArea()+" "+f.getPerimetro());
+		}
+	}
 
 	public static void main(String[] args) {
 		//ejercicio1y2();
 		//ejercicio3();
-		ejercicio4();
+		//ejercicio4();
+		ejercicio5();
 		
 	}
 

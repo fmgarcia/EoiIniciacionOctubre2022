@@ -3,7 +3,9 @@ package modelo;
 import java.util.Objects;
 import java.util.Random;
 
-public class Animal {
+import poo2.IHablador;
+
+public abstract class Animal implements IHablador{
 	protected double peso; 
 	protected String nombre;
 	
@@ -73,6 +75,8 @@ public class Animal {
 			return false;
 		return true;
 	}
+	
+	public abstract String tipoAnimal();
 
 
 	

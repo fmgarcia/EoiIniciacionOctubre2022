@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Random;
 
-public class Ave extends Animal{
+public abstract class Ave extends Animal{
 	private boolean puedeVolar;
 	
 	public Ave(boolean puedeVolar,double peso,String nombre) { 
@@ -30,5 +30,6 @@ public class Ave extends Animal{
 		System.out.printf("Pio pio. He comido y ahora peso %.2f kilos\n",
 		peso);
 	}
+
 
 }
