@@ -42,6 +42,22 @@ public class ejercicios {
 		empresa.contrataEmpleado(new Empleado("Mario",2000));
 		empresa.contrataEmpleado(new Empleado("Lucía",5000));
 		
+		Empresa empresa2=new Empresa(empresa);
+		
+		empresa2.setDireccion(new Direccion("mayor",4));
+		
+		empresa2.getDireccion().setCalle("Romero");
+		
+		empresa2.setNombre("Otra empresa");
+		
+		empresa2.getEmpleado(0).setNombre("Lorenzo");
+		System.out.println("Empresa:" + empresa.getNombre()+" "+empresa.getDireccion());
+		empresa.mostrarEmpleados();
+		System.out.println("Empresa:" + empresa2.getNombre()+" "+empresa2.getDireccion());
+		empresa2.mostrarEmpleados();
+		
+		
+		
 	}
 
 	public static void main(String[] args) {
