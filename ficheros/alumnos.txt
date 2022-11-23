@@ -1,0 +1,6 @@
+Mari Chelo;10
+Ignacio;9
+Jesús;4
+María;9
+Antonio;6
+Pedro;8

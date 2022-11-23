@@ -1,0 +1,9 @@
+anguila
+naranja
+mesa
+silla
+cordero
+reja
+pantalla
+teclado
+puerta
