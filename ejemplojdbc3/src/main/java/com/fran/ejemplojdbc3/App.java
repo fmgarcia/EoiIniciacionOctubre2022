@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class App 
 {
@@ -67,10 +68,56 @@ public class App
 		}
 	}
 	
+	public static void ejemploInsert() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca el código de la categoría: ");
+		int categoria = Integer.parseInt(sc.nextLine());
+		System.out.println("Introduzca el título de la categoría: ");
+		String titulo = sc.nextLine();
+		System.out.println("Introduzca el salario de la categoría: ");
+		int salario = Integer.parseInt(sc.nextLine());
+		System.out.println("Introduzca el trienio de la categoría: ");
+		int trienio = Integer.parseInt(sc.nextLine());
+				
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+        {
+        	Statement st = con.createStatement();
+        	String sql = "INSERT INTO categorias VALUES (" + categoria + ", '" + titulo + "', " + salario + ", " + trienio + ")";
+        	System.out.println(sql);
+        	int filasInsertadas = st.executeUpdate(sql);
+        	System.out.println("Se ha insertado " + filasInsertadas + (filasInsertadas==1?"fila":"filas") );    				
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sc.close();
+	}
+	
+	public static void ejemploDelete() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca el código de la categoría a borrar: ");
+		int categoria = Integer.parseInt(sc.nextLine());
+		
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+		{
+			Statement st = con.createStatement();
+			String sql = "DELETE FROM categorias WHERE categoria = " + categoria;
+			System.out.println(sql);
+			int filasBorradas = st.executeUpdate(sql);
+			System.out.println("Se ha insertado " + filasBorradas + (filasBorradas==1?"fila":"filas") );    				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sc.close();
+	}
+	
     public static void main( String[] args )
     {
     	//consultaSql30();
     	//consultaSql31();
-    	consultaSql32();
+    	//consultaSql32();
+    	//ejemploInsert();
+    	ejemploDelete();
     }
 }
