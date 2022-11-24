@@ -51,9 +51,26 @@ public class App
 		}
 	}
 	
+	public static void consultaSql32() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+        {
+        	Statement st = con.createStatement();
+        	ResultSet rs = st.executeQuery("SELECT empleados.nombre, categorias.salario FROM empleados, categorias WHERE empleados.categoria=categorias.categoria AND categorias.salario<(SELECT avg(categorias.salario) as MediaSalarios FROM empleados,categorias where empleados.categoria=categorias.categoria)");
+        	System.out.println("Fila Nombre                 Salario");
+        	String formateo = "%-5d%-20s%10d\n";
+        	while(rs.next()) {  // recorre todas las filas de los resultados
+        		System.out.printf(formateo,rs.getRow(),rs.getString("nombre"),rs.getInt("salario"));
+        	}			
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
     public static void main( String[] args )
     {
     	//consultaSql30();
-    	consultaSql31();
+    	//consultaSql31();
+    	consultaSql32();
     }
 }
