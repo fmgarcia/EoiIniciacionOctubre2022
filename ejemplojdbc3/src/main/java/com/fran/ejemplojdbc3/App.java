@@ -36,8 +36,24 @@ public class App
 		}
 	}
 	
+	
+	public static void consultaSql31() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+	    {
+	    	Statement st = con.createStatement();
+	    	ResultSet rs = st.executeQuery("select dep.DEPTNO, dep.nombre, count(*) AS numeroEmpleados from DEPARTAMENTOS dep, DPTOFICINAS dpof, empleados emp where dep.deptno = dpof.departamento and dpof.codigo = emp.departamento group by dep.DEPTNO, dep.nombre having count(*) >5");
+	    	while(rs.next()) { // recorre todas las filas de los resultados
+	    		System.out.println(rs.getString("nombre") + " " + rs.getInt("numeroEmpleados"));
+	    	}
+	    } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
     public static void main( String[] args )
     {
-    	consultaSql30();
+    	//consultaSql30();
+    	consultaSql31();
     }
 }
