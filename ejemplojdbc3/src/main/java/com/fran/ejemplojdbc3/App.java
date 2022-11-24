@@ -85,7 +85,7 @@ public class App
         	String sql = "INSERT INTO categorias VALUES (" + categoria + ", '" + titulo + "', " + salario + ", " + trienio + ")";
         	System.out.println(sql);
         	int filasInsertadas = st.executeUpdate(sql);
-        	System.out.println("Se ha insertado " + filasInsertadas + (filasInsertadas==1?"fila":"filas") );    				
+        	System.out.println("Se ha insertado " + filasInsertadas + (filasInsertadas==1?" fila":" filas") );    				
         } catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,7 +104,32 @@ public class App
 			String sql = "DELETE FROM categorias WHERE categoria = " + categoria;
 			System.out.println(sql);
 			int filasBorradas = st.executeUpdate(sql);
-			System.out.println("Se ha insertado " + filasBorradas + (filasBorradas==1?"fila":"filas") );    				
+			System.out.println("Se ha borrado " + filasBorradas + (filasBorradas==1?" fila":" filas") );    				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sc.close();
+	}
+	
+	public static void ejemploUpdate() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca el código de la categoría a actualizar: ");
+		int categoria = Integer.parseInt(sc.nextLine());
+		System.out.println("Introduzca el nuevo título de la categoría: ");
+		String titulo = sc.nextLine();
+		System.out.println("Introduzca el nuevo salario de la categoría: ");
+		int salario = Integer.parseInt(sc.nextLine());
+		System.out.println("Introduzca el nuevo trienio de la categoría: ");
+		int trienio = Integer.parseInt(sc.nextLine());
+		
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+		{
+			Statement st = con.createStatement();
+			String sql = "UPDATE categorias SET titulo = '" + titulo + "', salario = " + salario + ", trienio = " + trienio + " WHERE categoria = " + categoria;
+			System.out.println(sql);
+			int filasActualizadas = st.executeUpdate(sql);
+			System.out.println("Se ha actualizado " + filasActualizadas + (filasActualizadas==1?" fila":" filas") );    				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,6 +143,7 @@ public class App
     	//consultaSql31();
     	//consultaSql32();
     	//ejemploInsert();
-    	ejemploDelete();
+    	//ejemploDelete();
+    	//ejemploUpdate();
     }
 }
