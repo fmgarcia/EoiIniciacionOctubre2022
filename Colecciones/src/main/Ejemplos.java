@@ -1,15 +1,46 @@
 package main;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import modelo.MiComparador;
 import modelo.Persona;
 
 public class Ejemplos {
-
-	public static void main(String[] args) {
-		List<Integer> miLista=new ArrayList<Integer>();
+	
+	public static void ejemploMapas() {
+		
+		Map<String,String> miDiccionario=new HashMap<>();
+		
+		miDiccionario.put("mesa", "table");
+		miDiccionario.put("silla", "chair");
+		miDiccionario.put("cabeza", "head");
+		miDiccionario.put("botella", "bottle");
+		
+		System.out.println(miDiccionario.get("bebé"));
+		System.out.println(miDiccionario.getOrDefault("bebé", "Unknown"));
+		
+		for(Entry<String,String> e:miDiccionario.entrySet()) {
+			System.out.printf("%s es en inglés %s\n",e.getKey(),e.getValue());
+			
+		}
+		
+		for(String key:miDiccionario.keySet())
+			System.out.println(key);
+		
+		for(String value:miDiccionario.values()) {
+			System.out.println(value);
+		}
+		
+		miDiccionario.forEach((clave,valor)-> System.out.printf("%s es en inglés %s\n",clave,valor));
+		
+		
+	}
+	public static void ejemploListas() {
+	List<Integer> miLista=new ArrayList<Integer>();
 		
 		miLista.add(23);
 		miLista.add(100);
@@ -17,6 +48,11 @@ public class Ejemplos {
 		miLista.add(22);
 		
 		miLista.replaceAll(n->n-10);
+		
+		for(int i=0;i<miLista.size();i++)
+		{
+			System.out.println(miLista.get(i));
+		}
 		
 		Integer[] numeros= {2,3,4};
 		List<Integer> otraLista=Arrays.asList(numeros);
@@ -103,6 +139,18 @@ public class Ejemplos {
 		personas.sort((p1,p2)-> Integer.compare(p2.getEdad(), p1.getEdad()));
 		personas.forEach(System.out::println);
 		
+		personas.addAll(otrasPersonas);
+		personas.get(personas.size()-1).setEdad(10);	
+		otrasPersonas.forEach(System.out::println);
+		
+		ArrayList<Persona> miOtraLista=new ArrayList<>();
+		
+		
+	}
+
+	public static void main(String[] args) {
+	//	ejemploListas();
+		ejemploMapas();
 		
 	}
 
