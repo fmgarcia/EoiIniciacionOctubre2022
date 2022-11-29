@@ -4,6 +4,7 @@ public class Persona implements Comparable<Persona>{
 	private String nombre;
 	private String dni;
 	private int edad;
+	private String telefono;
 	
 	public Persona() {
 		this.nombre="";
@@ -19,6 +20,12 @@ public class Persona implements Comparable<Persona>{
 		this.nombre=nombre;
 		this.dni=dni;
 		this.edad=edad;
+	}
+	
+	public Persona(String nombre,String dni,int edad,String telefono) {
+		this(nombre,dni,edad);
+		this.setTelefono(telefono);
+		
 	}
 	
 	public Persona(Persona p) {
@@ -63,7 +70,7 @@ public class Persona implements Comparable<Persona>{
 		return dni+": "+nombre+" "+edad;
 	}
 
-/*	@Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -85,10 +92,18 @@ public class Persona implements Comparable<Persona>{
 			return false;
 		return true;
 	}
-*/
+
 	@Override
 	public int compareTo(Persona o) {
 		return Integer.compare(this.edad, o.edad);
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	

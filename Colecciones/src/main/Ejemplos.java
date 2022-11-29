@@ -1,4 +1,6 @@
 package main;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,6 +10,7 @@ import java.util.Map.Entry;
 
 import modelo.MiComparador;
 import modelo.Persona;
+import modelo.Tarea;
 
 public class Ejemplos {
 	
@@ -36,6 +39,8 @@ public class Ejemplos {
 		}
 		
 		miDiccionario.forEach((clave,valor)-> System.out.printf("%s es en inglés %s\n",clave,valor));
+		
+		
 		
 		
 	}
@@ -148,9 +153,24 @@ public class Ejemplos {
 		
 	}
 
+	public static void ejemploMapas2() {
+		Map<LocalDateTime,Tarea> agenda=new HashMap<>();
+		agenda.put(LocalDateTime.now().plusDays(3), new Tarea("Ir a la compra"));
+		agenda.put(LocalDateTime.parse("2022-11-29T19:55:00"), 
+				new Tarea("Hacer la cena"));
+		agenda.put(LocalDateTime.now().plusHours(3), new Tarea("Sacar la basura"));
+		
+		agenda.forEach((clave,valor)-> System.out.println(clave +"-"+valor));
+		
+		agenda.get(LocalDateTime.parse("2022-11-29T19:55:00")).setAcabada(true);
+		
+		agenda.forEach((clave,valor)-> System.out.println(clave +"-"+valor));
+	}
+	
 	public static void main(String[] args) {
 	//	ejemploListas();
-		ejemploMapas();
+	//	ejemploMapas();
+		ejemploMapas2();
 		
 	}
 

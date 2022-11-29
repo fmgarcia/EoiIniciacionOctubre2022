@@ -3,12 +3,19 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
+import modelo.Alumno;
+import modelo.Colegio;
 import modelo.Direccion;
 import modelo.Empleado;
 import modelo.Empresa;
+import modelo.Persona;
+import modelo.Profesor;
 
 public class ejercicios {
 	
@@ -98,12 +105,75 @@ public class ejercicios {
 		
 		
 	}
+	
+	public static void ejercicio3() {
+		Map<String,Persona> personas=new HashMap<>();
+		
+		personas.put("111111A", new Persona("Mari Chelo","111111A",22,"1122777"));
+		personas.put("3333333X", new Persona("María","3333333X",44,"2333667"));
+		personas.put("44444S",new Persona("Esteban","44444S",25,"2223554"));
+		personas.put("222222C", new Persona("Pepito","222222C",93,"3232322"));
+		
+	//	personas.forEach((clave,valor)-> System.out.println(valor));
+		
+		int edad=personas.get("111111A").getEdad();
+		personas.get("111111A").setEdad(edad+10);
+		
+		List<String> invitadas=new ArrayList<>();
+		
+		invitadas.add("111111A");
+		invitadas.add("44444S");
+		
+		for(String s:invitadas) {
+			System.out.println(personas.get(s).getNombre()+"--"+
+						personas.get(s).getTelefono());
+		}
+		
+		
+	}
 
+	public static void ejercicioColegio() {
+		Scanner sc=new Scanner(System.in);
+		
+		Colegio colegio=new Colegio();
+		colegio.addPersona(new Alumno("Man","333",12,"333","PP"));
+		colegio.addPersona(new Alumno("Man2","444",12,"333","P2"));
+		colegio.addPersona(new Alumno("Man3","666",12,"333","PP"));
+		colegio.addPersona(new Alumno("Man4","777",12,"333","PP"));	
+		colegio.addPersona(new Profesor("Profe","343434",44,"r3r3",Arrays.asList("Prog","Mates")));
+		colegio.addPersona(new Profesor("Profe2","34377434",47,"r3r3",Arrays.asList("Prog","Lengua")));
+		colegio.addPersona(new Alumno("Man5","388833",12,"333","P2"));
+		colegio.addPersona(new Alumno("Man6","889",12,"333","PP"));
+	
+		colegio.listarAlumnos();
+		Map<String,Alumno> excursion=new HashMap<>();
+		boolean salir=false;
+		String dni;
+		while(!salir) {
+			System.out.print("Introduzca alumno:");
+			dni=sc.nextLine();
+			int posicion;
+			if(dni.length()>0)
+			{
+				posicion=colegio.getPersonas().indexOf(new Persona("",dni,0));
+				excursion.put(dni, (Alumno)colegio.getPersonas().get(posicion));
+			}
+			else
+				salir=true;
+			System.out.println(excursion);
+		}
+		
+		
+		
+	}
 	public static void main(String[] args) {
 	//	ejercicio1();
 	//	ejercicio2();
 	//	ejercicio4();
-		ejercicioListas();
+	//	ejercicioListas();
+	//	ejercicio3();
+		ejercicioColegio();
+		
 		
 	}	
 
