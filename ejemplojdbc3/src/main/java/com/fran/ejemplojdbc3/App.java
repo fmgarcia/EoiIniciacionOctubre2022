@@ -5,7 +5,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import com.fran.ejemplojdbc3.entidades.Categoria;
+import com.fran.ejemplojdbc3.entidades.Empleado;
 
 public class App 
 {
@@ -13,6 +18,8 @@ public class App
 	public static final String URL ="jdbc:mysql://localhost:3306/eoi2";
 	public static final String USUARIO = "root";
 	public static final String PASSWORD = "";
+	public static List<Empleado> empleados = new ArrayList<Empleado>();  // Lista de empleados vacía inicialmente
+	public static List<Categoria> categorias = new ArrayList<Categoria>();  // Lista de empleados vacía inicialmente
 	
 	
 	public static void consultaSql30() {
@@ -36,8 +43,7 @@ public class App
 			e.printStackTrace();
 		}
 	}
-	
-	
+		
 	public static void consultaSql31() {
 		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
 	    {
@@ -69,14 +75,43 @@ public class App
 	}
 	
 	
-	public static void empleados() {
+	public static void cargarEmpleados() {
 		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
         {
         	Statement st = con.createStatement();
         	ResultSet rs = st.executeQuery("SELECT * FROM empleados");
         	        	
-        	while(rs.next()) {  // recorre todas las filas de los resultados
-        	
+        	while(rs.next()) {  // recorre todas las filas de los resultados y guardamos los elementos en la lista
+        		Empleado e = new Empleado(
+        				rs.getInt("num"),
+        				rs.getString("nombre"),
+        				rs.getInt("edad"),
+        				rs.getInt("departamento"),
+        				rs.getInt("categoria"),
+        				rs.getDate("contrato").toLocalDate()
+        				);
+        		empleados.add(e);
+        	}			
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void cargarCategorias() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+        {
+        	Statement st = con.createStatement();
+        	ResultSet rs = st.executeQuery("SELECT * FROM categorias");
+        	        	
+        	while(rs.next()) {  // recorre todas las filas de los resultados y guardamos los elementos en la lista
+        		Categoria c = new Categoria(
+        				rs.getInt("categoria"),
+        				rs.getString("titulo"),
+        				rs.getInt("salario"),
+        				rs.getInt("trienio")
+        				);
+        		categorias.add(c);
         	}			
         } catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -152,14 +187,55 @@ public class App
 		}
 		sc.close();
 	}
+
+	public static void showMenu() {
+		
+		Scanner sc = new Scanner(System.in);
+		int opcion = -1;
+    	do {
+    		System.out.println("1. Buscar empleado por nombre");
+    		System.out.println("2. Buscar categoria por nombre");
+    		System.out.println("3. Obtener años trabajado por empleado");
+    		System.out.println("0. Salir");
+    		System.out.println("Introduzca opción: ");
+    		opcion = Integer.parseInt(sc.nextLine());
+    		switch(opcion) {
+    		case 1:
+    			System.out.println("Introduzca el nombre:");
+    			String nombre = sc.nextLine();
+    			empleados.stream()
+    				.filter(e->e.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+    				.forEach(e->System.out.println(e.getNombre()));
+    			break;
+    		case 2:
+    			break;
+    		case 3:
+    			break;
+    		default:
+    			break;
+    		}
+    	}while(opcion!=0);
+				
+		sc.close();
+	}
 	
     public static void main( String[] args )
     {
+    	
     	//consultaSql30();
     	//consultaSql31();
     	//consultaSql32();
     	//ejemploInsert();
     	//ejemploDelete();
     	//ejemploUpdate();
+    	cargarEmpleados();
+    	cargarCategorias();
+    	//empleados.forEach(e->System.out.println(e));
+    	//empleados.forEach(e->System.out.println(e.getNombre() + " ha trabajado " + e.anyosTrabajados() + " años"));   	
+    	//categorias.forEach(c->System.out.println(c));
+    	showMenu();
+    	
+    	
+    	
     }
 }
