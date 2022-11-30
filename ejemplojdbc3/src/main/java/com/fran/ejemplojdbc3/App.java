@@ -68,6 +68,22 @@ public class App
 		}
 	}
 	
+	
+	public static void empleados() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+        {
+        	Statement st = con.createStatement();
+        	ResultSet rs = st.executeQuery("SELECT * FROM empleados");
+        	        	
+        	while(rs.next()) {  // recorre todas las filas de los resultados
+        	
+        	}			
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void ejemploInsert() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca el código de la categoría: ");
