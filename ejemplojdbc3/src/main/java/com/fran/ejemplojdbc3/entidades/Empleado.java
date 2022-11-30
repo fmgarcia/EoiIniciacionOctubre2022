@@ -1,6 +1,7 @@
 package com.fran.ejemplojdbc3.entidades;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 public class Empleado {
@@ -114,6 +115,11 @@ public class Empleado {
 			return false;
 		Empleado other = (Empleado) obj;
 		return num == other.num;
+	}
+	
+	// 6. Métodos adicionales de el Empleado
+	public int anyosTrabajados() {
+		return Period.between(this.contrato, LocalDate.now()).getYears();
 	}
 
 	
