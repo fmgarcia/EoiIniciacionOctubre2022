@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
 
-public class Empleado {
+public class Empleado implements Comparable<Empleado> {
 	
 	// 1 creamos los atributos
 	private int num;
@@ -120,6 +120,11 @@ public class Empleado {
 	// 6. Métodos adicionales de el Empleado
 	public int anyosTrabajados() {
 		return Period.between(this.contrato, LocalDate.now()).getYears();
+	}
+
+	@Override
+	public int compareTo(Empleado o) {
+		return this.anyosTrabajados()-o.anyosTrabajados();
 	}
 
 	

@@ -1,16 +1,23 @@
 package com.fran.ejemplojdbc3;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
 import com.fran.ejemplojdbc3.entidades.Categoria;
 import com.fran.ejemplojdbc3.entidades.Empleado;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class App 
 {
@@ -196,6 +203,8 @@ public class App
     		System.out.println("1. Buscar empleado por nombre");
     		System.out.println("2. Buscar categoria por nombre");
     		System.out.println("3. Obtener años trabajado por empleado");
+    		System.out.println("4. Empleados con años trabajados");
+    		System.out.println("5. Categorias en Json");
     		System.out.println("0. Salir");
     		System.out.println("Introduzca opción: ");
     		opcion = Integer.parseInt(sc.nextLine());
@@ -208,9 +217,40 @@ public class App
     				.forEach(e->System.out.println(e.getNombre()));
     			break;
     		case 2:
+    			System.out.println("Introduzca el título de la categoría:");
+    			String titulo = sc.nextLine();
+    			categorias.stream()
+    		         .filter(categoria -> categoria.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
+    		         .forEach(categoria -> System.out.println(categoria.getTitulo()));
     			break;
     		case 3:
+    			System.out.println("Introduzca el nombre:");
+    			String nombre2 = sc.nextLine();
+    			empleados.stream()
+				.filter(e->e.getNombre().toLowerCase().contains(nombre2.toLowerCase()))
+				.forEach(e->System.out.println(e.getNombre() + " " + e.anyosTrabajados()));
     			break;
+    		case 4:
+    			System.out.println("Introduzca el número mínimo de años trabajados:");
+    			int anyos = Integer.parseInt(sc.nextLine());
+    			empleados.stream()
+				.filter(e->e.anyosTrabajados()>=anyos)
+				.sorted(Collections.reverseOrder())
+				.limit(3)
+				.forEach(e->System.out.println(e.getNombre() + " " + e.anyosTrabajados()));
+    			break;
+    		case 5:
+    			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    			String json = gson.toJson(categorias);
+    			//System.out.println(json);
+    			try {
+					Files.writeString(Paths.get("", "empleados.txt"), json);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			//String json = new Gson().toJson(categorias);
+    			//System.out.println(json);
     		default:
     			break;
     		}
