@@ -1,6 +1,7 @@
 package com.fran.programacionfuncional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -215,6 +216,28 @@ public class App
 				System.out.println(elPrimero);
 	}
 	
+	// A partir de una lista de listas las fusiona
+	public static void flatMap() {
+		
+		// Cogemos una lista de listas y las concatenamos en una única lista. Pasa de dos dimensiones a una [][] -> []
+		List<String> chicas = new ArrayList<String>(Arrays.asList("Antonella","Esther"));
+		List<String> chicos = new ArrayList<String>(Arrays.asList("Néstor","Alvaro","Jhohar","Theo","James"));
+		//chicos.forEach(e->System.out.println(e));
+		List<List<String>> alumnos = new ArrayList<List<String>>(Arrays.asList(chicas,chicos));
+		
+		List<String> todosJuntos = alumnos.stream()
+			.flatMap(e->e.stream())
+			.collect(Collectors.toList());
+		todosJuntos.forEach(e->System.out.println(e));
+	}
+
+	// Hace lo mismo que el forEach pero no es final
+	public static void peek() {
+		usuarios.stream()
+			.peek(e->e.setSueldo(e.getSueldo()+1000))
+			.filter(e->e.getSueldo()>10000)
+			.forEach(e->System.out.println(e));
+	}
 	
     public static void main( String[] args )
     {
@@ -225,6 +248,8 @@ public class App
     	//toSet();
     	//sum();
     	//average();
-    	find();
+    	//find();
+    	//flatMap();
+    	peek();
     }
 }
