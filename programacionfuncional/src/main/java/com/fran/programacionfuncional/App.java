@@ -1,7 +1,10 @@
 package com.fran.programacionfuncional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fran.programacionfuncional.entidades.Usuario;
@@ -60,6 +63,7 @@ public class App
 		usuarios.stream().forEach(e->System.out.println(e));
 	}
 	
+	// A partir de una lista de elementos filtro algunos de ellos
 	public static void filter() {
 		// No es final
 		for(Usuario usuario : usuarios) {  // Programación estructurada
@@ -101,10 +105,126 @@ public class App
 		
 	}
 	
+	// Sirva para quedarse con parte de un objeto
+	public static void map() {
+		// No final.
+		// Lista de los nombres de los usuarios que tengan más de 5 letras
+		List<String> nombresUsuariosMas5letras =usuarios.stream()
+			.map(e->e.getNombre())
+			//.filter(e->e.length()>5)
+			.collect(Collectors.toList());
+		System.out.println("Imprimo el List:");
+		nombresUsuariosMas5letras.forEach(e->System.out.println(e));
+		
+		Set<String> nombresNorepetidosUsuarios =usuarios.stream()
+				.map(e->e.getNombre())
+				.collect(Collectors.toSet());
+		System.out.println("Imprimo el Set:");
+		nombresNorepetidosUsuarios.forEach(e->System.out.println(e));
+	}
+	
+	// Sirve para crear conjuntos de elementos no repetidos. Un elemento es igual a otro si cumple su método equals.
+	public static void toSet() {
+		// Final
+		// Funcional. Crear conjunto de elementos no repetidos
+		Set<Usuario> usuariosNoRepetidos = usuarios.stream().collect(Collectors.toSet());
+		usuariosNoRepetidos.forEach(e->System.out.println(e));
+		
+		// Estructurado. Hace lo mismo que la linea anterior
+		Set<Usuario> usuariosNoRepetidosE = new HashSet<Usuario>();
+		for(Usuario usuario : usuarios) {
+			boolean noEsta = false;
+			for(Usuario noRepetido : usuariosNoRepetidosE) {
+				if(noRepetido.equals(usuarios)) {
+					noEsta = true;
+				}
+			}
+			if(noEsta==false) {
+				usuariosNoRepetidosE.add(usuario);
+			}
+		}
+		usuariosNoRepetidosE.forEach(e->System.out.println(e));
+		
+		// Hace lo mismo que las dos de arriba
+		Set<Usuario> noRepetidos = new HashSet<Usuario>(usuarios);
+		noRepetidos.forEach(e->System.out.println(e));
+		
+	}
+
+	// Para calcular sumas de atributos numéricos de objetos en una lista. Final
+	public static void sum() {
+		// En dos pasos
+		double sumaSueldos = usuarios.stream()
+			.mapToDouble(e->e.getSueldo())
+			.sum();
+		System.out.println(sumaSueldos);
+		
+		// Imprimir sueldo en un paso
+		System.out.println(usuarios.stream().mapToDouble(e->e.getSueldo()).sum());
+		
+		// Suma de los sueldos >0
+		// Filtro los sueldos de los usuarios
+		System.out.println(usuarios.stream()
+				.filter(e->e.getSueldo()>=0)
+				.mapToDouble(e->e.getSueldo())
+				.sum());
+		// Filtros una vez que ya tengo los sueldos
+		System.out.println(usuarios.stream()
+				.mapToDouble(e->e.getSueldo())
+				.filter(e->e>=0)
+				.sum());		
+	}
+	
+	// Para calcular medias de atributos numéricos de objetos en una lista. Final
+	public static void average() {
+		
+		// 1 forma de gestionar los optional
+		OptionalDouble mediaSueldos = usuarios.stream()
+				.mapToDouble(e->e.getSueldo())
+				.average();
+		if(mediaSueldos.isPresent())
+			System.out.println(mediaSueldos.getAsDouble());
+		else
+			System.out.println("No hay media ya que la lista está vacia");
+		
+		// 2 forma de gestionar los valores opcionales con valores por defecto (orElse)
+		double mediaSueldos2 = usuarios.stream()
+				.mapToDouble(e->e.getSueldo())
+				.average()
+				.orElse(-1);
+		if(mediaSueldos2!=-1)
+			System.out.println(mediaSueldos2);
+		else
+			System.out.println("No hay media ya que la lista está vacia");
+	}
+	
+	// Buscar elementos en las listas. Final
+	public static void find() {
+		// Ejemplo findAny
+		Usuario alAzar = usuarios.stream()
+				.filter(e->e.getSueldo()<5000)
+				.findAny()   // Coge uno pero no tiene porqué ser el primero
+				.orElse(new Usuario(-1,"Al azar","1234"));
+		System.out.println(alAzar);
+		
+		// Ejemplo findFirst
+		Usuario elPrimero = usuarios.stream()
+				.filter(e->e.getSueldo()<5000)
+				.findFirst()   // Coge uno pero no tiene porqué ser el primero
+				.orElse(new Usuario(-1,"No hay ninguno","1234"));
+				System.out.println(elPrimero);
+	}
+	
+	
     public static void main( String[] args )
     {
     	cargarDatosIniciales();
     	//forEach();
-    	filter();
+    	//filter();
+    	//map();
+    	//toSet();
+    	//sum();
+    	//average();
+    	find();
     }
 }
