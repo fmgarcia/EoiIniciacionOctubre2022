@@ -347,7 +347,7 @@ public class App
 		
 	}
 	
-	// recolectar datos estadísticos. Final
+	// recolectar datos estadísticos del atributo que queremos. Final
 	public static void summarizingDouble() {
 		DoubleSummaryStatistics estadisticas = usuarios.stream()
 				.collect(Collectors.summarizingDouble(Usuario::getSueldo));
@@ -357,6 +357,7 @@ public class App
 		System.out.println("Suma de todos los sueldos: " + estadisticas.getSum());
 		System.out.println("Número de sueldos: " + estadisticas.getCount());
 	}
+	
 	
 	
     public static void main( String[] args )
@@ -378,6 +379,6 @@ public class App
     	//maxMin();
     	//distinct();
     	//match();
-    	summarizingDouble();
+    	//summarizingDouble();
     }
 }
