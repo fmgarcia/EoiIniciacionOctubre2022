@@ -2,6 +2,7 @@ package com.fran.programacionfuncional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fran.programacionfuncional.entidades.Usuario;
 
@@ -48,7 +49,7 @@ public class App
 			System.out.println(usuario);
 		}
 		
-		// Formas funcionales
+		// Formas funcionales. Es final.
 		// 3. lambda
 		usuarios.forEach(e->System.out.println(e));
 		
@@ -59,9 +60,51 @@ public class App
 		usuarios.stream().forEach(e->System.out.println(e));
 	}
 	
+	public static void filter() {
+		// No es final
+		for(Usuario usuario : usuarios) {  // Programación estructurada
+			if(usuario.getSueldo()>5000) {
+				if(usuario.getNombre().length()>6) {
+					System.out.println(usuario);
+				}				
+			}
+		}
+		
+		usuarios.stream()  // Progración funcional
+		.filter(e->e.getSueldo()>5000)
+		.filter(e->e.getNombre().length()>6)
+		.forEach(e->System.out.println(e));
+		
+		// Creación de una sublista de elementos estructura
+		// Creamos una lista de aquellos que ganen entre 5000 y 2000 y que tengan más de 5 letras en su nombre
+		List<Usuario> sueldosAltos = new ArrayList<Usuario>();
+		for(Usuario usuario : usuarios) {
+			if(usuario.getSueldo()>5000) {
+				if(usuario.getSueldo()<20000) {
+					if(usuario.getNombre().length()>5) {
+						sueldosAltos.add(usuario);
+					}
+				}				
+			}
+		}
+		for(Usuario usuario : sueldosAltos) {
+			System.out.println(usuario);
+		}
+		
+		// Programacion funcional
+		List<Usuario> sueldosAltosF = usuarios.stream()
+				.filter(e->e.getSueldo()>5000)
+				.filter(e->e.getSueldo()<20000)
+				.filter(e->e.getNombre().length()>5)
+				.collect(Collectors.toList());
+		sueldosAltosF.forEach(e->System.out.println(e));
+		
+	}
+	
     public static void main( String[] args )
     {
     	cargarDatosIniciales();
-    	forEach();
+    	//forEach();
+    	filter();
     }
 }
