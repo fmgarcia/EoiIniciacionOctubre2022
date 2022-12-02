@@ -9,7 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
+import modelo.Circulo;
+import modelo.Cuadrado;
+import modelo.IFigura;
 import modelo.MiComparador;
 import modelo.Persona;
 import modelo.Tarea;
@@ -190,12 +195,35 @@ public class Ejemplos {
 		
 		
 	}
+	public static void ejemploMapaOrdenado() {
+		Map<String,String> traducciones=new TreeMap<>();
+		traducciones.put("mesa", "table");
+		traducciones.put("silla", "chair");
+		traducciones.put("cabeza", "head");
+		traducciones.put("botella", "bottle");
+		
+		traducciones.forEach((clave,valor)->System.out.println(clave + " "+valor));
+	}
+	
+	public static void ejemploConjuntoOrdenado() {
+		Set<IFigura> misFiguras=new TreeSet<>(
+				(f1,f2)-> Double.compare(f1.getArea(), f2.getArea()));
+		misFiguras.add(new Circulo(12));
+		misFiguras.add(new Cuadrado(4));
+		misFiguras.forEach(f->System.out.println(f.getClass()+" "+f.getArea()));
+		misFiguras.add(new Circulo(2));
+		misFiguras.forEach(f->System.out.println(f.getClass()+" "+f.getArea()));
+		misFiguras.add(new Cuadrado(3));
+		misFiguras.forEach(f->System.out.println(f.getClass()+" "+f.getArea()));
+	}
 	
 	public static void main(String[] args) {
 	//	ejemploListas();
 	//	ejemploMapas();
 	//	ejemploMapas2();
-		ejemploConjunto();
+	//	ejemploConjunto();
+	//	ejemploMapaOrdenado();
+		ejemploConjuntoOrdenado();	
 		
 	}
 
