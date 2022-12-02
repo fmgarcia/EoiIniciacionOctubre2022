@@ -4,9 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import modelo.MiComparador;
 import modelo.Persona;
@@ -167,10 +169,33 @@ public class Ejemplos {
 		agenda.forEach((clave,valor)-> System.out.println(clave +"-"+valor));
 	}
 	
+	public static void ejemploConjunto() {
+		Set<String> misFrutas=new HashSet<>();
+		misFrutas.add("Manzana");
+		misFrutas.add("Plátano");
+		misFrutas.add("Ciruela");
+		misFrutas.add("Manzana");
+		misFrutas.add("Ciruela");
+		misFrutas.add("ciruela");
+		
+		Set<String> otrasFrutas=new HashSet<>();
+		otrasFrutas.add("Plátano");
+		otrasFrutas.add("Manzana");
+		
+		System.out.println(misFrutas);
+		misFrutas.remove("ciruela");
+		System.out.println(misFrutas);
+		System.out.println(misFrutas.contains("Manzana"));
+		System.out.println(misFrutas.containsAll(otrasFrutas));
+		
+		
+	}
+	
 	public static void main(String[] args) {
 	//	ejemploListas();
 	//	ejemploMapas();
-		ejemploMapas2();
+	//	ejemploMapas2();
+		ejemploConjunto();
 		
 	}
 

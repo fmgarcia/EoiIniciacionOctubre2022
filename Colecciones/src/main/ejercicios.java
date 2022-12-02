@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 import modelo.Alumno;
 import modelo.Colegio;
@@ -161,18 +163,41 @@ public class ejercicios {
 			else
 				salir=true;
 			System.out.println(excursion);
-		}
-		
-		
+		}	
 		
 	}
+	
+	public static void ejercicio5() {
+		Set<String> cadenas=new HashSet<>();
+		Scanner sc=new Scanner(System.in);
+		String palabra;
+		boolean salir=false;
+		while(!salir) {
+			System.out.print("Introduzca una palabra:");
+			palabra=sc.nextLine();
+			if(palabra.equals("salir")){
+				salir=true;
+			}
+			else {
+				if(cadenas.contains(palabra)) {
+					System.out.printf("La palabra %s está repetida\n",palabra);
+				}
+				else {
+					cadenas.add(palabra);
+				}
+			}
+		}
+		System.out.println(cadenas);
+	}
+	
 	public static void main(String[] args) {
 	//	ejercicio1();
 	//	ejercicio2();
 	//	ejercicio4();
 	//	ejercicioListas();
 	//	ejercicio3();
-		ejercicioColegio();
+	//	ejercicioColegio();
+		ejercicio5();
 		
 		
 	}	
