@@ -1,0 +1,44 @@
+[
+  {
+    "categoria": 1,
+    "titulo": "Director",
+    "salario": 50000,
+    "trienio": 1000
+  },
+  {
+    "categoria": 2,
+    "titulo": "Jefe Seccion",
+    "salario": 40000,
+    "trienio": 800
+  },
+  {
+    "categoria": 3,
+    "titulo": "Administrativo",
+    "salario": 35000,
+    "trienio": 700
+  },
+  {
+    "categoria": 4,
+    "titulo": "Comercial",
+    "salario": 35000,
+    "trienio": 700
+  },
+  {
+    "categoria": 5,
+    "titulo": "Empleado de Almacen",
+    "salario": 25000,
+    "trienio": 500
+  },
+  {
+    "categoria": 6,
+    "titulo": "Categoria desde Java",
+    "salario": 45000,
+    "trienio": 1500
+  },
+  {
+    "categoria": 7,
+    "titulo": "Categoría 7 actualizada",
+    "salario": 100000,
+    "trienio": 2000
+  }
+]

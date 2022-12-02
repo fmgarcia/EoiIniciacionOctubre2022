@@ -1,11 +1,23 @@
 package com.fran.ejemplojdbc3;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
+
+import com.fran.ejemplojdbc3.entidades.Categoria;
+import com.fran.ejemplojdbc3.entidades.Empleado;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class App 
 {
@@ -13,6 +25,8 @@ public class App
 	public static final String URL ="jdbc:mysql://localhost:3306/eoi2";
 	public static final String USUARIO = "root";
 	public static final String PASSWORD = "";
+	public static List<Empleado> empleados = new ArrayList<Empleado>();  // Lista de empleados vacía inicialmente
+	public static List<Categoria> categorias = new ArrayList<Categoria>();  // Lista de empleados vacía inicialmente
 	
 	
 	public static void consultaSql30() {
@@ -36,8 +50,7 @@ public class App
 			e.printStackTrace();
 		}
 	}
-	
-	
+		
 	public static void consultaSql31() {
 		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
 	    {
@@ -61,6 +74,51 @@ public class App
         	String formateo = "%-5d%-20s%10d\n";
         	while(rs.next()) {  // recorre todas las filas de los resultados
         		System.out.printf(formateo,rs.getRow(),rs.getString("nombre"),rs.getInt("salario"));
+        	}			
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public static void cargarEmpleados() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+        {
+        	Statement st = con.createStatement();
+        	ResultSet rs = st.executeQuery("SELECT * FROM empleados");
+        	        	
+        	while(rs.next()) {  // recorre todas las filas de los resultados y guardamos los elementos en la lista
+        		Empleado e = new Empleado(
+        				rs.getInt("num"),
+        				rs.getString("nombre"),
+        				rs.getInt("edad"),
+        				rs.getInt("departamento"),
+        				rs.getInt("categoria"),
+        				rs.getDate("contrato").toLocalDate()
+        				);
+        		empleados.add(e);
+        	}			
+        } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void cargarCategorias() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+        {
+        	Statement st = con.createStatement();
+        	ResultSet rs = st.executeQuery("SELECT * FROM categorias");
+        	        	
+        	while(rs.next()) {  // recorre todas las filas de los resultados y guardamos los elementos en la lista
+        		Categoria c = new Categoria(
+        				rs.getInt("categoria"),
+        				rs.getString("titulo"),
+        				rs.getInt("salario"),
+        				rs.getInt("trienio")
+        				);
+        		categorias.add(c);
         	}			
         } catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -136,14 +194,88 @@ public class App
 		}
 		sc.close();
 	}
+
+	public static void showMenu() {
+		
+		Scanner sc = new Scanner(System.in);
+		int opcion = -1;
+    	do {
+    		System.out.println("1. Buscar empleado por nombre");
+    		System.out.println("2. Buscar categoria por nombre");
+    		System.out.println("3. Obtener años trabajado por empleado");
+    		System.out.println("4. Empleados con años trabajados");
+    		System.out.println("5. Categorias en Json");
+    		System.out.println("0. Salir");
+    		System.out.println("Introduzca opción: ");
+    		opcion = Integer.parseInt(sc.nextLine());
+    		switch(opcion) {
+    		case 1:
+    			System.out.println("Introduzca el nombre:");
+    			String nombre = sc.nextLine();
+    			empleados.stream()
+    				.filter(e->e.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+    				.forEach(e->System.out.println(e.getNombre()));
+    			break;
+    		case 2:
+    			System.out.println("Introduzca el título de la categoría:");
+    			String titulo = sc.nextLine();
+    			categorias.stream()
+    		         .filter(categoria -> categoria.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
+    		         .forEach(categoria -> System.out.println(categoria.getTitulo()));
+    			break;
+    		case 3:
+    			System.out.println("Introduzca el nombre:");
+    			String nombre2 = sc.nextLine();
+    			empleados.stream()
+				.filter(e->e.getNombre().toLowerCase().contains(nombre2.toLowerCase()))
+				.forEach(e->System.out.println(e.getNombre() + " " + e.anyosTrabajados()));
+    			break;
+    		case 4:
+    			System.out.println("Introduzca el número mínimo de años trabajados:");
+    			int anyos = Integer.parseInt(sc.nextLine());
+    			empleados.stream()
+				.filter(e->e.anyosTrabajados()>=anyos)
+				.sorted(Collections.reverseOrder())
+				.limit(3)
+				.forEach(e->System.out.println(e.getNombre() + " " + e.anyosTrabajados()));
+    			break;
+    		case 5:
+    			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    			String json = gson.toJson(categorias);
+    			//System.out.println(json);
+    			try {
+					Files.writeString(Paths.get("", "empleados.txt"), json);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			//String json = new Gson().toJson(categorias);
+    			//System.out.println(json);
+    		default:
+    			break;
+    		}
+    	}while(opcion!=0);
+				
+		sc.close();
+	}
 	
     public static void main( String[] args )
     {
+    	
     	//consultaSql30();
     	//consultaSql31();
     	//consultaSql32();
     	//ejemploInsert();
     	//ejemploDelete();
     	//ejemploUpdate();
+    	cargarEmpleados();
+    	cargarCategorias();
+    	//empleados.forEach(e->System.out.println(e));
+    	//empleados.forEach(e->System.out.println(e.getNombre() + " ha trabajado " + e.anyosTrabajados() + " años"));   	
+    	//categorias.forEach(c->System.out.println(c));
+    	showMenu();
+    	
+    	
+    	
     }
 }
