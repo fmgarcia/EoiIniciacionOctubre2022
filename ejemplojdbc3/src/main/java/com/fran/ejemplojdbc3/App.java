@@ -83,6 +83,57 @@ public class App
 		}
 	}
 	
+	public static void consultaSql33() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+		{
+			Statement st = con.createStatement();
+			//ResultSet rs = st.executeQuery("Select distinct titulo FROM empleados, categorias Where empleados.categoria=categorias.categoria and year(contrato)<1990");
+			//ResultSet rs = st.executeQuery("Select titulo FROM categorias Where categoria IN (Select categoria from empleados where year(contrato)<1990)");
+			ResultSet rs = st.executeQuery("Select titulo FROM categorias c Where EXISTS (Select 1 from empleados e where e.categoria=c.categoria AND year(contrato)<1990)");
+			while(rs.next()) { // recorre todas las filas de los resultados
+	    		System.out.println(rs.getString("titulo"));
+	    	}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void consultaSql34() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+		{
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("Select nombre from empleados where contrato< (Select min(contrato) FROM empleados,dptoficinas,departamentos Where empleados.departamento=dptoficinas.codigo and dptoficinas.departamento=departamentos.deptno and departamentos.nombre='Informática')");
+			while(rs.next()) { // recorre todas las filas de los resultados
+				System.out.println(rs.getString("nombre"));
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void consultaSql35() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+		{
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("Select ciudad, count(*) as NumeroEmpleados\r\n"
+					+ "FROM empleados,dptoficinas,oficinas\r\n"
+					+ "Where empleados.departamento=dptoficinas.codigo and dptoficinas.oficina=oficinas.oficina\r\n"
+					+ "group by oficinas.oficina\r\n"
+					+ "having count(*)> AVG((Select count(*)\r\n"
+					+ "FROM empleados,dptoficinas,oficinas\r\n"
+					+ "Where empleados.departamento=dptoficinas.codigo and dptoficinas.oficina=oficinas.oficina\r\n"
+					+ "group by oficinas.oficina))");
+			while(rs.next()) { // recorre todas las filas de los resultados
+				System.out.println(rs.getString("ciudad") + " " + rs.getInt("NumeroEmpleados"));
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public static void cargarEmpleados() {
 		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
@@ -285,6 +336,8 @@ public class App
     	//consultaSql30();
     	//consultaSql31();
     	//consultaSql32();
+    	//consultaSql33();
+    	//consultaSql34();
     	//ejemploInsert();
     	//ejemploDelete();
     	//ejemploUpdate();
