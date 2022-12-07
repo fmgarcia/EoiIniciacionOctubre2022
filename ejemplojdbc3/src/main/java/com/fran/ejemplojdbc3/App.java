@@ -8,12 +8,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import com.fran.ejemplojdbc3.adaptadores.LocalDateAdapter;
 import com.fran.ejemplojdbc3.entidades.Categoria;
 import com.fran.ejemplojdbc3.entidades.Empleado;
 import com.google.gson.Gson;
@@ -27,7 +30,6 @@ public class App
 	public static final String PASSWORD = "";
 	public static List<Empleado> empleados = new ArrayList<Empleado>();  // Lista de empleados vacía inicialmente
 	public static List<Categoria> categorias = new ArrayList<Categoria>();  // Lista de empleados vacía inicialmente
-	
 	
 	public static void consultaSql30() {
 		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
@@ -205,6 +207,7 @@ public class App
     		System.out.println("3. Obtener años trabajado por empleado");
     		System.out.println("4. Empleados con años trabajados");
     		System.out.println("5. Categorias en Json");
+    		System.out.println("6. Empleados en Json");
     		System.out.println("0. Salir");
     		System.out.println("Introduzca opción: ");
     		opcion = Integer.parseInt(sc.nextLine());
@@ -237,20 +240,37 @@ public class App
 				.filter(e->e.anyosTrabajados()>=anyos)
 				.sorted(Collections.reverseOrder())
 				.limit(3)
-				.forEach(e->System.out.println(e.getNombre() + " " + e.anyosTrabajados()));
+				.forEach(e->System.out.println(e.getNombre() + " " + e.anyosTrabajados() + " contratado: " + e.fechaEspanyola()));
     			break;
     		case 5:
     			Gson gson = new GsonBuilder().setPrettyPrinting().create();
     			String json = gson.toJson(categorias);
     			//System.out.println(json);
     			try {
-					Files.writeString(Paths.get("", "empleados.txt"), json);
+					Files.writeString(Paths.get("", "categorias.json"), json);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
     			//String json = new Gson().toJson(categorias);
     			//System.out.println(json);
+    			break;
+    		case 6:
+    			Gson gsonEmpleados = new GsonBuilder()
+    			.setPrettyPrinting()
+    			.registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+    			.create();
+    			String jsonEmpleados = gsonEmpleados.toJson(empleados);
+    			//System.out.println(json);
+    			try {
+					Files.writeString(Paths.get("", "empleados.json"), jsonEmpleados);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			//String json = new Gson().toJson(categorias);
+    			//System.out.println(json);
+    			break;
     		default:
     			break;
     		}

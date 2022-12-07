@@ -2,6 +2,7 @@ package com.fran.ejemplojdbc3.entidades;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Empleado implements Comparable<Empleado> {
@@ -13,6 +14,8 @@ public class Empleado implements Comparable<Empleado> {
 	private int departamento;
 	private int categoria;
 	private LocalDate contrato;
+	
+	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy");
 	
 	// 2 Creamos los constructores
 	// 2.1 Constructor vacío
@@ -127,5 +130,8 @@ public class Empleado implements Comparable<Empleado> {
 		return this.anyosTrabajados()-o.anyosTrabajados();
 	}
 
+	public String fechaEspanyola() {
+		return formatter.format(contrato);
+	}
 	
 }
