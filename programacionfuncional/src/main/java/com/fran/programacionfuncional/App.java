@@ -111,6 +111,7 @@ public class App
 		
 	}
 	
+	
 	// Sirva para quedarse con parte de un objeto
 	public static void map() {
 		// No final.
@@ -317,7 +318,11 @@ public class App
 		long idsDistintos = usuarios.stream()
 			.distinct()
 			.count();
-		System.out.println(idsDistintos);			
+		System.out.println(idsDistintos);
+		
+		// Las siguientes dos lineas crean un conjunto (Set) con valores no duplicados a partir de una lista (que sí puede tener valores duplicados)
+		Set<Usuario> elementosDistintos = new HashSet<Usuario>(usuarios);
+		Set<Usuario> elementosDistintos2 = usuarios.stream().distinct().collect(Collectors.toSet());
 	}
 	
 	// Todos devuelven booleanos. 
@@ -356,9 +361,49 @@ public class App
 		System.out.println("Mínimo sueldo: " + estadisticas.getMin());
 		System.out.println("Suma de todos los sueldos: " + estadisticas.getSum());
 		System.out.println("Número de sueldos: " + estadisticas.getCount());
+		
 	}
 	
+	public static void reduce() {
+		// Final. Reduce los datos que tengamos a UN ÚNICO VALOR		
+		// Si quieres multiplicar todos los sueldos teniendo un valor inicial
+		double multiplicacionSueldos = usuarios.stream()
+		.mapToDouble(e->e.getSueldo())
+		.reduce(1000,(a,b)->a*b);
+		//.reduce(0, Double::sum);  // Haría la suma de los sueldos
+		System.out.println("La multiplicación de los sueldos es: " + multiplicacionSueldos);		
+	}
 	
+	public static void joining() {
+		String nombresSeparadosPorComas = usuarios.stream()
+		.map(e->e.getNombre().toLowerCase())
+		.distinct()
+		.sorted()
+		.collect(Collectors.joining(", "));
+		System.out.println(nombresSeparadosPorComas);
+	}
+	
+	public static String convertirMayusculas(String nombre) {
+		// Simula un proceso de un segundo aprox
+		try {
+			Thread.sleep(1000); // Un segundo
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return nombre.toUpperCase();
+	}
+	
+	public static void parallelStream() {
+		long tiempo1 = System.currentTimeMillis();
+		usuarios.stream().forEach(e->convertirMayusculas(e.getNombre()));
+		long tiempo2 = System.currentTimeMillis();
+		System.out.println("El proceso con stream tarda: " + (tiempo2-tiempo1));
+		tiempo1 = System.currentTimeMillis();
+		usuarios.parallelStream().forEach(e->convertirMayusculas(e.getNombre()));
+		tiempo2 = System.currentTimeMillis();
+		System.out.println("El proceso con parallel stream tarda: " + (tiempo2-tiempo1));
+	}
 	
     public static void main( String[] args )
     {
@@ -380,5 +425,8 @@ public class App
     	//distinct();
     	//match();
     	//summarizingDouble();
+    	//reduce();
+    	//joining();
+    	//parallelStream();
     }
 }
