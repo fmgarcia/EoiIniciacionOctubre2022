@@ -1,6 +1,8 @@
 package electrodomesticos;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class Inventario {
 				return new Blanca(partes[0],partes[1],partes[2],
 							Double.parseDouble(partes[3]),
 							Double.parseDouble(partes[4]),
-							partes[5]);
+							partes[5],Integer.parseInt(partes[6]));
 			}).collect(Collectors.toList());
 		} catch (IOException e) {
 			// TODO Bloque catch generado automáticamente
@@ -43,7 +45,7 @@ public class Inventario {
 				return new Marron(partes[0],partes[1],partes[2],
 							Double.parseDouble(partes[3]),
 							Double.parseDouble(partes[4]),
-							partes[5]);
+							partes[5],Integer.parseInt(partes[6]));
 			}).collect(Collectors.toList());
 		} catch (IOException e) {
 			// TODO Bloque catch generado automáticamente
@@ -59,7 +61,7 @@ public class Inventario {
 				return new Gris(partes[0],partes[1],partes[2],
 							Double.parseDouble(partes[3]),
 							Double.parseDouble(partes[4]),
-							partes[5]);
+							partes[5],Integer.parseInt(partes[6]));
 			}).collect(Collectors.toList());
 		} catch (IOException e) {
 			// TODO Bloque catch generado automáticamente
@@ -75,7 +77,7 @@ public class Inventario {
 				return new Pae(partes[0],partes[1],partes[2],
 							Double.parseDouble(partes[3]),
 							Double.parseDouble(partes[4]),
-							partes[5]);
+							partes[5],Integer.parseInt(partes[6]));
 			}).collect(Collectors.toList());
 		} catch (IOException e) {
 			// TODO Bloque catch generado automáticamente
@@ -89,11 +91,11 @@ public class Inventario {
 	}
 	
 	public void borrar(String codigo) {
-		lista.remove(new Blanca(codigo,"","",0,0,""));
+		lista.remove(new Blanca(codigo,"","",0,0,"",0));
 	}
 	
 	public Electrod getElemento(String codigo) {
-		return lista.get(lista.indexOf(new Blanca(codigo,"","",0,0,"")));
+		return lista.get(lista.indexOf(new Blanca(codigo,"","",0,0,"",0)));
 	}
 	
 	public void mostrarGamaNombre(String gama) {
@@ -141,6 +143,43 @@ public class Inventario {
 				Double.compare(e1.getPrecioCompra(), e2.getPrecioCompra()):
 				e1.getNombre().compareTo(e2.getNombre())).
 		forEach(System.out::println);
+	}
+	
+	public void recalculaPrecio(String texto,double porcentaje) {
+		lista.stream().filter(e->e.getDescripcion().contains(texto))
+		.forEach(e->e.setPrecioVenta(e.getPrecioCompra()*porcentaje/100+e.getPrecioCompra()));
+	}
+	
+	public void addCantidad(int cantidad,String codigo) {		
+		lista.stream().filter(e-> e.getCodigo().equals(codigo))
+		.forEach(e -> e.setCantidad(e.getCantidad()+cantidad));
+	}
+	
+	public void addCantidadTexto(int cantidad,String texto) {
+		lista.stream().filter(e-> e.getNombre().contains(texto) ||
+				e.getDescripcion().contains(texto))
+		.forEach(e -> e.setCantidad(e.getCantidad()+cantidad));
+	}
+	
+	public void guardar() {
+		try(PrintWriter printB=new PrintWriter(new FileWriter("blanca.txt"));
+			PrintWriter printM=new PrintWriter(new FileWriter("marron.txt"));
+			PrintWriter printG=new PrintWriter(new FileWriter("gris.txt"));
+			PrintWriter printP=new PrintWriter(new FileWriter("pae.txt")))
+		{
+			lista.stream().filter(e-> e instanceof Blanca)
+			.forEach(e-> printB.println(e.cadenaFichero()));
+			lista.stream().filter(e-> e instanceof Gris)
+			.forEach(e-> printG.println(e.cadenaFichero()));
+			lista.stream().filter(e-> e instanceof Marron)
+			.forEach(e-> printM.println(e.cadenaFichero()));
+			lista.stream().filter(e-> e instanceof Pae)
+			.forEach(e-> printP.println(e.cadenaFichero()));
+		} catch (IOException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@Override

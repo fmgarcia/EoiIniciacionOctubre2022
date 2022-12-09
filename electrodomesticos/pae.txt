@@ -1,2 +1,2 @@
-555rr;cafetera automática D;cafetera automática Delongui;400;600;A
-666yy;freidora 400;freidora magefesa ;120;180;C
+555rr;cafetera automática D;cafetera automática Delongui;400;600;A;21
+666yy;freidora 400;freidora magefesa ;120;180;C;66

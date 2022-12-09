@@ -7,9 +7,12 @@ public abstract class Electrod {
 	double precioCompra;
 	double precioVenta;
 	String cEnergetica;
+	int cantidad;
 	
+	
+
 	public Electrod(String codigo, String nombre, String descripcion, double precioCompra, double precioVenta,
-			String cEnergetica) {
+			String cEnergetica,int cantidad) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -17,6 +20,7 @@ public abstract class Electrod {
 		this.precioCompra = precioCompra;
 		this.precioVenta = precioVenta;
 		this.cEnergetica = cEnergetica;
+		this.cantidad=cantidad;
 	}
 
 	public String getCodigo() {
@@ -67,12 +71,25 @@ public abstract class Electrod {
 		this.cEnergetica = cEnergetica;
 	}
 	
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+	
 	@Override
 	public String toString() {
 			return 
-					String.format("%-10s: %-20s - %-30s -> %6.2f %6.2f %-6s",codigo,nombre,
-									descripcion,precioCompra,precioVenta,cEnergetica);
+					String.format("%-10s: %-20s - %-30s -> %6.2f %6.2f %-6s=%d",codigo,nombre,
+									descripcion,precioCompra,precioVenta,cEnergetica,cantidad);
 	}
+	public String cadenaFichero() {
+		return 
+				String.format("%s;%s;%s;%.0f;%.0f;%s;%d",codigo,nombre,
+								descripcion,precioCompra,precioVenta,cEnergetica,cantidad);
+}
 
 	@Override
 	public int hashCode() {

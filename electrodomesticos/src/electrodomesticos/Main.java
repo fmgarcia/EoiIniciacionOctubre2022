@@ -13,6 +13,9 @@ public class Main {
 		System.out.println("4.- Mostrar gama ordenados por nombre");
 		System.out.println("5.- Mostrar precio inferior");
 		System.out.println("6.- Mostrar precio compra inferior");
+		System.out.println("7.- Recalcular precios");
+		System.out.println("8.- Añadir cantidad electrodoméstico");
+		System.out.println("9.- Añadir cantidad por texto");
 		System.out.println("S.- Salir");
 		System.out.println();
 		System.out.print("Introduzca una opción:");
@@ -22,6 +25,7 @@ public class Main {
 		Scanner sc=new Scanner(System.in);
 		String codigo,nombre,descripcion,cEnergetica;
 		double precioVenta,precioCoste;
+		int cantidad;
 		String gama;
 		System.out.print("Codigo: ");
 		codigo=sc.nextLine();
@@ -35,24 +39,26 @@ public class Main {
 		precioVenta=sc.nextDouble();
 		System.out.print("Categoría energética: ");
 		cEnergetica=sc.next();
+		System.out.print("Cantidad: ");
+		cantidad=sc.nextInt();
 		System.out.print("Gama:(G)ris (B)lanca (P)AE (M)arrón: ");
 		gama=sc.next();
 		switch(gama) {
 		case "G":
 			inventario.add(new Gris(codigo,nombre,descripcion,
-									precioCoste,precioVenta,cEnergetica));
+									precioCoste,precioVenta,cEnergetica,cantidad));
 			break;
 		case "B":
 			inventario.add(new Blanca(codigo,nombre,descripcion,
-									precioCoste,precioVenta,cEnergetica));
+									precioCoste,precioVenta,cEnergetica,cantidad));
 			break;
 		case "P":
 			inventario.add(new Pae(codigo,nombre,descripcion,
-									precioCoste,precioVenta,cEnergetica));
+									precioCoste,precioVenta,cEnergetica,cantidad));
 			break;	
 		case "M":
 			inventario.add(new Marron(codigo,nombre,descripcion,
-									precioCoste,precioVenta,cEnergetica));
+									precioCoste,precioVenta,cEnergetica,cantidad));
 			break;
 			default:
 				System.out.println("Gama incorrecta");
@@ -102,6 +108,11 @@ public class Main {
 		texto=sc.nextLine();
 		if(texto.length()>0)
 			elemento.setPrecioVenta(Double.parseDouble(texto));	
+		System.out.printf("Cantidad: %s\n",elemento.getCantidad());
+		System.out.print("Nueva cantidad:");
+		texto=sc.nextLine();
+		if(texto.length()>0)
+			elemento.setCantidad(Integer.parseInt(texto));	
 	}
 	
 	public static void mostrarGamaNombre(Inventario inventario) {
@@ -125,6 +136,34 @@ public class Main {
 		System.out.println("Precio de Compra:");
 		double precio=sc.nextDouble();
 		inventario.mostrarPrecioCompraInferior(precio);
+	}
+	
+	public static void recalculaPrecios(Inventario inventario) {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Texto:");
+		String texto=sc.nextLine();
+		System.out.print("Porcentaje:");
+		double porcentaje=sc.nextDouble();
+		inventario.recalculaPrecio(texto, porcentaje);
+		
+	}
+	public static void addCantidad(Inventario inventario) {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Código");
+		String codigo=sc.nextLine();
+		System.out.print("Cantidad:");
+		int cantidad=sc.nextInt();
+		inventario.addCantidad(cantidad, codigo);
+		
+	}
+	public static void addCantidadTexto(Inventario inventario) {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Texto");
+		String texto=sc.nextLine();
+		System.out.print("Cantidad:");
+		int cantidad=sc.nextInt();
+		inventario.addCantidadTexto(cantidad, texto);
+		
 	}
 
 	public static void main(String[] args) {
@@ -156,8 +195,18 @@ public class Main {
 			case "6":
 				mostrarPrecioCompraInferior(inventario);
 				break;
+			case "7":
+				recalculaPrecios(inventario);
+				break;
+			case "8":
+				addCantidad(inventario);
+				break;
+			case "9":
+				addCantidadTexto(inventario);
+				break;
 			case "S":
 				salir=true;
+				inventario.guardar();
 				break;
 			}
 		}
