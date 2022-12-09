@@ -8,12 +8,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import com.fran.ejemplojdbc3.adaptadores.LocalDateAdapter;
 import com.fran.ejemplojdbc3.entidades.Categoria;
 import com.fran.ejemplojdbc3.entidades.Empleado;
 import com.google.gson.Gson;
@@ -27,7 +30,6 @@ public class App
 	public static final String PASSWORD = "";
 	public static List<Empleado> empleados = new ArrayList<Empleado>();  // Lista de empleados vacía inicialmente
 	public static List<Categoria> categorias = new ArrayList<Categoria>();  // Lista de empleados vacía inicialmente
-	
 	
 	public static void consultaSql30() {
 		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
@@ -76,6 +78,50 @@ public class App
         		System.out.printf(formateo,rs.getRow(),rs.getString("nombre"),rs.getInt("salario"));
         	}			
         } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void consultaSql33() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+		{
+			Statement st = con.createStatement();
+			//ResultSet rs = st.executeQuery("Select distinct titulo FROM empleados, categorias Where empleados.categoria=categorias.categoria and year(contrato)<1990");
+			//ResultSet rs = st.executeQuery("Select titulo FROM categorias Where categoria IN (Select categoria from empleados where year(contrato)<1990)");
+			ResultSet rs = st.executeQuery("Select titulo FROM categorias c Where EXISTS (Select 1 from empleados e where e.categoria=c.categoria AND year(contrato)<1990)");
+			while(rs.next()) { // recorre todas las filas de los resultados
+	    		System.out.println(rs.getString("titulo"));
+	    	}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void consultaSql34() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+		{
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("Select nombre from empleados where contrato< (Select min(contrato) FROM empleados,dptoficinas,departamentos Where empleados.departamento=dptoficinas.codigo and dptoficinas.departamento=departamentos.deptno and departamentos.nombre='Informática')");
+			while(rs.next()) { // recorre todas las filas de los resultados
+				System.out.println(rs.getString("nombre"));
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void consultaSql35() {
+		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
+		{
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("Select ciudad, count(*) as NumeroEmpleados FROM empleados,dptoficinas,oficinas Where empleados.departamento=dptoficinas.codigo and dptoficinas.oficina=oficinas.oficina group by oficinas.oficina having count(*)> (Select avg(sub1.cuenta) from (Select count(*) as cuenta FROM empleados,dptoficinas,oficinas Where empleados.departamento=dptoficinas.codigo and dptoficinas.oficina=oficinas.oficina group by oficinas.oficina) sub1)");
+			while(rs.next()) { // recorre todas las filas de los resultados
+				System.out.println(rs.getString("ciudad") + " " + rs.getInt("NumeroEmpleados"));
+			}			
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -205,6 +251,7 @@ public class App
     		System.out.println("3. Obtener años trabajado por empleado");
     		System.out.println("4. Empleados con años trabajados");
     		System.out.println("5. Categorias en Json");
+    		System.out.println("6. Empleados en Json");
     		System.out.println("0. Salir");
     		System.out.println("Introduzca opción: ");
     		opcion = Integer.parseInt(sc.nextLine());
@@ -237,20 +284,37 @@ public class App
 				.filter(e->e.anyosTrabajados()>=anyos)
 				.sorted(Collections.reverseOrder())
 				.limit(3)
-				.forEach(e->System.out.println(e.getNombre() + " " + e.anyosTrabajados()));
+				.forEach(e->System.out.println(e.getNombre() + " " + e.anyosTrabajados() + " contratado: " + e.fechaEspanyola()));
     			break;
     		case 5:
     			Gson gson = new GsonBuilder().setPrettyPrinting().create();
     			String json = gson.toJson(categorias);
     			//System.out.println(json);
     			try {
-					Files.writeString(Paths.get("", "empleados.txt"), json);
+					Files.writeString(Paths.get("", "categorias.json"), json);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
     			//String json = new Gson().toJson(categorias);
     			//System.out.println(json);
+    			break;
+    		case 6:
+    			Gson gsonEmpleados = new GsonBuilder()
+    			.setPrettyPrinting()
+    			.registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+    			.create();
+    			String jsonEmpleados = gsonEmpleados.toJson(empleados);
+    			//System.out.println(json);
+    			try {
+					Files.writeString(Paths.get("", "empleados.json"), jsonEmpleados);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			//String json = new Gson().toJson(categorias);
+    			//System.out.println(json);
+    			break;
     		default:
     			break;
     		}
@@ -265,15 +329,18 @@ public class App
     	//consultaSql30();
     	//consultaSql31();
     	//consultaSql32();
+    	//consultaSql33();
+    	//consultaSql34();
+    	consultaSql35();
     	//ejemploInsert();
     	//ejemploDelete();
     	//ejemploUpdate();
-    	cargarEmpleados();
-    	cargarCategorias();
+    	//cargarEmpleados();
+    	//cargarCategorias();
     	//empleados.forEach(e->System.out.println(e));
     	//empleados.forEach(e->System.out.println(e.getNombre() + " ha trabajado " + e.anyosTrabajados() + " años"));   	
     	//categorias.forEach(c->System.out.println(c));
-    	showMenu();
+    	//showMenu();
     	
     	
     	

@@ -1,0 +1,266 @@
+[
+  {
+    "num": 1000,
+    "nombre": "Antonio Gutierrez",
+    "edad": 45,
+    "departamento": 100,
+    "categoria": 1,
+    "contrato": 7285
+  },
+  {
+    "num": 1001,
+    "nombre": "Paloma Blanco",
+    "edad": 56,
+    "departamento": 100,
+    "categoria": 2,
+    "contrato": 6951
+  },
+  {
+    "num": 1002,
+    "nombre": "Antonio Pazos",
+    "edad": 52,
+    "departamento": 100,
+    "categoria": 3,
+    "contrato": 5916
+  },
+  {
+    "num": 1003,
+    "nombre": "Ana Garcia",
+    "edad": 27,
+    "departamento": 101,
+    "categoria": 2,
+    "contrato": 9426
+  },
+  {
+    "num": 1004,
+    "nombre": "Amparo Beltran",
+    "edad": 28,
+    "departamento": 101,
+    "categoria": 3,
+    "contrato": 10261
+  },
+  {
+    "num": 1005,
+    "nombre": "Enrique Gomez",
+    "edad": 36,
+    "departamento": 101,
+    "categoria": 3,
+    "contrato": 11143
+  },
+  {
+    "num": 1006,
+    "nombre": "Nieves Soler",
+    "edad": 25,
+    "departamento": 105,
+    "categoria": 2,
+    "contrato": 9568
+  },
+  {
+    "num": 1007,
+    "nombre": "Juan Jose Velasco",
+    "edad": 34,
+    "departamento": 105,
+    "categoria": 3,
+    "contrato": 9906
+  },
+  {
+    "num": 1008,
+    "nombre": "Isidro Perez",
+    "edad": 22,
+    "departamento": 109,
+    "categoria": 2,
+    "contrato": 11083
+  },
+  {
+    "num": 1009,
+    "nombre": "Ignacio Lopez",
+    "edad": 38,
+    "departamento": 109,
+    "categoria": 3,
+    "contrato": 7401
+  },
+  {
+    "num": 1010,
+    "nombre": "Vicente Salvador",
+    "edad": 29,
+    "departamento": 109,
+    "categoria": 3,
+    "contrato": 9319
+  },
+  {
+    "num": 1011,
+    "nombre": "Carmen Hernandez",
+    "edad": 44,
+    "departamento": 102,
+    "categoria": 2,
+    "contrato": 7501
+  },
+  {
+    "num": 1012,
+    "nombre": "Juan Pons",
+    "edad": 50,
+    "departamento": 102,
+    "categoria": 4,
+    "contrato": 8869
+  },
+  {
+    "num": 1013,
+    "nombre": "Pedro Fernandez",
+    "edad": 23,
+    "departamento": 102,
+    "categoria": 4,
+    "contrato": 10850
+  },
+  {
+    "num": 1014,
+    "nombre": "Silvia Blasco",
+    "edad": 33,
+    "departamento": 102,
+    "categoria": 4,
+    "contrato": 8088
+  },
+  {
+    "num": 1015,
+    "nombre": "Jose Alegre",
+    "edad": 26,
+    "departamento": 106,
+    "categoria": 2,
+    "contrato": 10099
+  },
+  {
+    "num": 1016,
+    "nombre": "Cristina Prats",
+    "edad": 46,
+    "departamento": 106,
+    "categoria": 4,
+    "contrato": 5435
+  },
+  {
+    "num": 1017,
+    "nombre": "Carlos Gimenez",
+    "edad": 35,
+    "departamento": 106,
+    "categoria": 4,
+    "contrato": 9265
+  },
+  {
+    "num": 1018,
+    "nombre": "Maria Gonzalez",
+    "edad": 37,
+    "departamento": 108,
+    "categoria": 4,
+    "contrato": 9663
+  },
+  {
+    "num": 1019,
+    "nombre": "Manuel Torres",
+    "edad": 24,
+    "departamento": 108,
+    "categoria": 4,
+    "contrato": 10245
+  },
+  {
+    "num": 1020,
+    "nombre": "Jose Perez",
+    "edad": 28,
+    "departamento": 110,
+    "categoria": 2,
+    "contrato": 9577
+  },
+  {
+    "num": 1021,
+    "nombre": "Alejandro Martos",
+    "edad": 34,
+    "departamento": 110,
+    "categoria": 4,
+    "contrato": 9055
+  },
+  {
+    "num": 1022,
+    "nombre": "Veronica Muelas",
+    "edad": 25,
+    "departamento": 110,
+    "categoria": 4,
+    "contrato": 10047
+  },
+  {
+    "num": 1023,
+    "nombre": "Elena Lopez",
+    "edad": 29,
+    "departamento": 112,
+    "categoria": 4,
+    "contrato": 8955
+  },
+  {
+    "num": 1024,
+    "nombre": "Isabel Fernandez",
+    "edad": 22,
+    "departamento": 112,
+    "categoria": 4,
+    "contrato": 11242
+  },
+  {
+    "num": 1025,
+    "nombre": "Jose Mujica",
+    "edad": 49,
+    "departamento": 103,
+    "categoria": 2,
+    "contrato": 6455
+  },
+  {
+    "num": 1026,
+    "nombre": "Pedro Bledos",
+    "edad": 26,
+    "departamento": 103,
+    "categoria": 5,
+    "contrato": 10263
+  },
+  {
+    "num": 1027,
+    "nombre": "Pablo Costas",
+    "edad": 35,
+    "departamento": 107,
+    "categoria": 5,
+    "contrato": 9314
+  },
+  {
+    "num": 1028,
+    "nombre": "Ester Castro",
+    "edad": 27,
+    "departamento": 111,
+    "categoria": 2,
+    "contrato": 9695
+  },
+  {
+    "num": 1029,
+    "nombre": "Gregoria Mas",
+    "edad": 33,
+    "departamento": 111,
+    "categoria": 5,
+    "contrato": 9934
+  },
+  {
+    "num": 1030,
+    "nombre": "Jose Medina",
+    "edad": 34,
+    "departamento": 104,
+    "categoria": 2,
+    "contrato": 9295
+  },
+  {
+    "num": 1031,
+    "nombre": "Maria Utrillas",
+    "edad": 27,
+    "departamento": 104,
+    "categoria": 3,
+    "contrato": 10092
+  },
+  {
+    "num": 1032,
+    "nombre": "Marina Gilabert",
+    "edad": 24,
+    "departamento": 104,
+    "categoria": 3,
+    "contrato": 10561
+  }
+]
