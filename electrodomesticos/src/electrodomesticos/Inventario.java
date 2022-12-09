@@ -127,6 +127,22 @@ public class Inventario {
 		
 	}
 	
+	public void mostrarPrecioVentaInferior(double precio) {
+		lista.stream().filter(e->e.getPrecioVenta()<precio).
+		sorted((e1,e2)-> 
+		Double.compare(e1.getPrecioVenta(), e2.getPrecioVenta())).
+		forEach(System.out::println);
+	}
+	
+	public void mostrarPrecioCompraInferior(double precio) {
+		lista.stream().filter(e->e.getPrecioCompra()<precio).
+		sorted((e1,e2)-> 
+		e1.getNombre().compareTo(e2.getNombre())==0?
+				Double.compare(e1.getPrecioCompra(), e2.getPrecioCompra()):
+				e1.getNombre().compareTo(e2.getNombre())).
+		forEach(System.out::println);
+	}
+	
 	@Override
 	public String toString() {
 		return "  CODIGO   NOMBRE              DESCRIPCION                    "+

@@ -1,7 +1,7 @@
 12AE;frigorífico;frigorífico blanco 2 metros;400;600;A
 34kk;frigorífico metal;frigorífico metal 2 metros;400;600;B
-44565mm;lavadora;lavadora blanca;400;600;APLUS
-466mk;lavadora metal; lavadora metal 60;400;600;APLUSPLUS
+44565mm;lavadora;lavadora blanca;900;600;APLUS
+466mk;lavadora; lavadora metal 60;400;600;APLUSPLUS
 3456llk;lavavajillas;lavavajillas blanco 60 cm;400;600;A
 4543llo;lavavajillas metal;lavavajillas blanco 60 cm;400;600;B
-2234koo;secadora;secadora blanca 60 cm;400;600;C
+2234koo;lavadora;secadora blanca 60 cm;500;600;C

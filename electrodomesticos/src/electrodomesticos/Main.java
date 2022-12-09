@@ -11,6 +11,8 @@ public class Main {
 		System.out.println("2.- Borrar electrodoméstico");
 		System.out.println("3.- Modificar");
 		System.out.println("4.- Mostrar gama ordenados por nombre");
+		System.out.println("5.- Mostrar precio inferior");
+		System.out.println("6.- Mostrar precio compra inferior");
 		System.out.println("S.- Salir");
 		System.out.println();
 		System.out.print("Introduzca una opción:");
@@ -110,6 +112,20 @@ public class Main {
 		inventario.mostrarGamaNombre(gama);
 		
 	}
+	
+	public static void mostrarPrecioInferiorOrdenado(Inventario inventario) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Precio de Venta:");
+		double precio=sc.nextDouble();
+		inventario.mostrarPrecioVentaInferior(precio);
+	}
+	
+	public static void mostrarPrecioCompraInferior(Inventario inventario) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Precio de Compra:");
+		double precio=sc.nextDouble();
+		inventario.mostrarPrecioCompraInferior(precio);
+	}
 
 	public static void main(String[] args) {
 		Inventario inventario=new Inventario();
@@ -133,6 +149,12 @@ public class Main {
 				break;
 			case "4":
 				mostrarGamaNombre(inventario);
+				break;
+			case "5":
+				mostrarPrecioInferiorOrdenado(inventario);
+				break;
+			case "6":
+				mostrarPrecioCompraInferior(inventario);
 				break;
 			case "S":
 				salir=true;
