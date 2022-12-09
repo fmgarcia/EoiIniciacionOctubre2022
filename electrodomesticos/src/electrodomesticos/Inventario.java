@@ -56,7 +56,7 @@ public class Inventario {
 		{
 			return stream.map(line->{
 				String[] partes=line.split(";");
-				return new Marron(partes[0],partes[1],partes[2],
+				return new Gris(partes[0],partes[1],partes[2],
 							Double.parseDouble(partes[3]),
 							Double.parseDouble(partes[4]),
 							partes[5]);
@@ -72,7 +72,7 @@ public class Inventario {
 		{
 			return stream.map(line->{
 				String[] partes=line.split(";");
-				return new Marron(partes[0],partes[1],partes[2],
+				return new Pae(partes[0],partes[1],partes[2],
 							Double.parseDouble(partes[3]),
 							Double.parseDouble(partes[4]),
 							partes[5]);
@@ -86,6 +86,45 @@ public class Inventario {
 	
 	public void add(Electrod elemento) {
 		lista.add(elemento);
+	}
+	
+	public void borrar(String codigo) {
+		lista.remove(new Blanca(codigo,"","",0,0,""));
+	}
+	
+	public Electrod getElemento(String codigo) {
+		return lista.get(lista.indexOf(new Blanca(codigo,"","",0,0,"")));
+	}
+	
+	public void mostrarGamaNombre(String gama) {
+		
+		switch(gama) {
+		case "B":
+			lista.stream().
+			filter(e-> e instanceof Blanca).
+			sorted((e1,e2)-> e1.getNombre().compareTo(e2.getNombre())).
+			forEach(System.out::println);
+			break;
+		case "G":
+			lista.stream().
+			filter(e-> e instanceof Gris).
+			sorted((e1,e2)-> e1.getNombre().compareTo(e2.getNombre())).
+			forEach(System.out::println);
+			break;
+		case "P":
+			lista.stream().
+			filter(e-> e instanceof Pae).
+			sorted((e1,e2)-> e1.getNombre().compareTo(e2.getNombre())).
+			forEach(System.out::println);
+			break;
+		case "M":
+			lista.stream().
+			filter(e-> e instanceof Marron).
+			sorted((e1,e2)-> e1.getNombre().compareTo(e2.getNombre())).
+			forEach(System.out::println);
+			break;	
+		}
+		
 	}
 	
 	@Override
