@@ -117,14 +117,7 @@ public class App
 		try (Connection con = DriverManager.getConnection(URL, USUARIO, PASSWORD))
 		{
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("Select ciudad, count(*) as NumeroEmpleados\r\n"
-					+ "FROM empleados,dptoficinas,oficinas\r\n"
-					+ "Where empleados.departamento=dptoficinas.codigo and dptoficinas.oficina=oficinas.oficina\r\n"
-					+ "group by oficinas.oficina\r\n"
-					+ "having count(*)> AVG((Select count(*)\r\n"
-					+ "FROM empleados,dptoficinas,oficinas\r\n"
-					+ "Where empleados.departamento=dptoficinas.codigo and dptoficinas.oficina=oficinas.oficina\r\n"
-					+ "group by oficinas.oficina))");
+			ResultSet rs = st.executeQuery("Select ciudad, count(*) as NumeroEmpleados FROM empleados,dptoficinas,oficinas Where empleados.departamento=dptoficinas.codigo and dptoficinas.oficina=oficinas.oficina group by oficinas.oficina having count(*)> (Select avg(sub1.cuenta) from (Select count(*) as cuenta FROM empleados,dptoficinas,oficinas Where empleados.departamento=dptoficinas.codigo and dptoficinas.oficina=oficinas.oficina group by oficinas.oficina) sub1)");
 			while(rs.next()) { // recorre todas las filas de los resultados
 				System.out.println(rs.getString("ciudad") + " " + rs.getInt("NumeroEmpleados"));
 			}			
@@ -338,15 +331,16 @@ public class App
     	//consultaSql32();
     	//consultaSql33();
     	//consultaSql34();
+    	consultaSql35();
     	//ejemploInsert();
     	//ejemploDelete();
     	//ejemploUpdate();
-    	cargarEmpleados();
-    	cargarCategorias();
+    	//cargarEmpleados();
+    	//cargarCategorias();
     	//empleados.forEach(e->System.out.println(e));
     	//empleados.forEach(e->System.out.println(e.getNombre() + " ha trabajado " + e.anyosTrabajados() + " años"));   	
     	//categorias.forEach(c->System.out.println(c));
-    	showMenu();
+    	//showMenu();
     	
     	
     	
