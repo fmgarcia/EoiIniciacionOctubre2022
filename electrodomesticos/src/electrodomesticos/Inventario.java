@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ public class Inventario {
 	}
 	
 	private List<Electrod> rellenaBlanca(){
+		DecimalFormat df= new DecimalFormat();
 		try(Stream<String> stream=Files.lines(Paths.get("blanca.txt")))
 		{
 			return stream.map(line->{
