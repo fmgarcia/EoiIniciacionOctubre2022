@@ -5,3 +5,4 @@
 3456llk;lavavajillas;lavavajillas blanco 60 cm;400.0;600.0;A;20
 4543llo;lavavajillas metal;lavavajillas blanco 60 cm;400.0;600.0;B;34
 2234koo;lavadora;secadora blanca 60 cm;500.0;600.0;C;33
+dddee33;Nuevo;Nuevo prueba;344.0;233.0;A;44
