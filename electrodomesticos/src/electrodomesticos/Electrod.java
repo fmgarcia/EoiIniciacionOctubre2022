@@ -87,8 +87,8 @@ public abstract class Electrod {
 	}
 	public String cadenaFichero() {
 		return 
-				String.format("%s;%s;%s;%.0f;%.0f;%s;%d",codigo,nombre,
-								descripcion,precioCompra,precioVenta,cEnergetica,cantidad);
+				codigo+";"+nombre+";"+descripcion+";"+precioCompra+";"
+						+ precioVenta+";"+cEnergetica+";"+cantidad;
 }
 
 	@Override
