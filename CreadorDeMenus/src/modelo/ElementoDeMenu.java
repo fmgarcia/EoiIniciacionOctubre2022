@@ -35,13 +35,13 @@ public abstract class ElementoDeMenu {
 		
 	}
 	
-	abstract double getCalorias();
-	abstract double getGrasas();
-	abstract double getCarbohidratos();
-	abstract boolean tieneLeche();
-	abstract boolean tieneFrutosSecos();
-	abstract boolean tieneGluten();
-	abstract boolean tieneHuevos();
+	public abstract double getCalorias();
+	public abstract double getGrasas();
+	public abstract double getCarbohidratos();
+	public abstract boolean tieneLeche();
+	public abstract boolean tieneFrutosSecos();
+	public abstract boolean tieneGluten();
+	public abstract boolean tieneHuevos();
 
 	@Override
 	public int hashCode() {

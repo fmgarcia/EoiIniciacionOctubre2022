@@ -14,7 +14,7 @@ public class Plato extends ElementoDeMenu{
 	}
 
 	@Override
-	double getCalorias() {
+	public double getCalorias() {
 		double calorias=0;
 		for(Ingrediente i:ingredientes) {
 			calorias+=i.getAlimento().getCalorias()*i.getCantidad();
@@ -26,6 +26,7 @@ public class Plato extends ElementoDeMenu{
 	}
 
 	@Override
+	public
 	double getGrasas() {
 		double grasas=0;
 		for(Ingrediente i:ingredientes) {
@@ -38,6 +39,7 @@ public class Plato extends ElementoDeMenu{
 	}
 
 	@Override
+	public
 	double getCarbohidratos() {
 		double carbohidratos=0;
 		for(Ingrediente i:ingredientes) {
@@ -50,6 +52,7 @@ public class Plato extends ElementoDeMenu{
 	}
 
 	@Override
+	public
 	boolean tieneLeche() {
 		boolean leche=false;
 		for(int i=0;i<ingredientes.size() && !leche;i++) {
@@ -63,16 +66,19 @@ public class Plato extends ElementoDeMenu{
 	}
 
 	@Override
+	public
 	boolean tieneFrutosSecos() {
 		return ingredientes.stream().anyMatch(i->i.getAlimento().tieneFrutosSecos());
 	}
 
 	@Override
+	public
 	boolean tieneGluten() {
 		return ingredientes.stream().anyMatch(i->i.getAlimento().tieneGluten());
 	}
 
 	@Override
+	public
 	boolean tieneHuevos() {
 		return ingredientes.stream().anyMatch(i->i.getAlimento().tieneHuevos());
 	}

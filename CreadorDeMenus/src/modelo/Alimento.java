@@ -24,6 +24,10 @@ public class Alimento extends ElementoDeMenu{
 		
 		
 	}
+	
+	public Alimento(String nombre) {
+		this(nombre,"","",0,0,0,false,false,false,false);
+	}
 
 	public String getFrecuencia() {
 		return frecuencia;

@@ -1,6 +1,8 @@
 package utils;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.stream.Stream;
 import modelo.Alimento;
 import modelo.ElementoDeMenu;
 import modelo.Ingrediente;
+import modelo.Menu;
 import modelo.Plato;
 
 public class FileUtils {
@@ -58,6 +61,27 @@ public class FileUtils {
 		}
 		return lista;
 		
+	}
+	
+	public static void guardaMenu(Menu miMenu) {
+		try(PrintWriter printMenu=new PrintWriter(new FileWriter(miMenu.getCliente()+miMenu.getFecha())))
+		{
+			printMenu.println(miMenu.getCliente()+"     "+miMenu.getFecha().toString());
+			printMenu.println("NOMBRE        CALORÍAS GRASAS CARB  ALÉRGENOS");
+			miMenu.getElementos().stream().
+						map(e-> String.format("%15s %5.1f %5.1f %5.1f %s",e.getNombre(),
+							e.getCalorias(),e.getCarbohidratos(),e.getGrasas(),
+							(e.tieneFrutosSecos()?"F ":" ")+(e.tieneGluten()?"G ":" ")+
+							(e.tieneHuevos()?"H ":" ")+(e.tieneLeche()?"L ":" "))).
+							forEach(printMenu::println);
+			printMenu.printf("TOTALES             %5.1f %5.1f %5.1f %s",miMenu.getCalorias(),
+							miMenu.getCarbohidratos(),miMenu.getGrasas(),(miMenu.tieneFrutosSecos()?"F ":" ")+
+							(miMenu.tieneGluten()?"G ":" ")+
+							(miMenu.tieneHuevos()?"H ":" ")+(miMenu.tieneLeche()?"L ":" "));
+		} catch (IOException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
 	}
 
 }
