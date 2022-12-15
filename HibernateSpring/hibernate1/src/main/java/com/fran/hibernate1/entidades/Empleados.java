@@ -30,7 +30,16 @@ public class Empleados implements java.io.Serializable {
 
 	public Empleados() {
 	}
-
+	
+	public Empleados(String nombre, int edad, int departamento, int categoria, Date contrato) {
+		
+		this.nombre = nombre;
+		this.edad = edad;
+		this.departamento = departamento;
+		this.categoria = categoria;
+		this.contrato = contrato;
+	}
+	
 	public Empleados(int num, String nombre, int edad, int departamento, int categoria, Date contrato) {
 		this.num = num;
 		this.nombre = nombre;
