@@ -1,0 +1,5 @@
+12AE;ddd;ddd;333.0;333.0;A;333
+34kk;frigorífico metal;frigorífico metal 2 metros;400.0;600.0;B;30
+44565mm;lavadora;lavadora blanca;900.0;600.0;A+;20
+3456llk;lavavajillas;lavavajillas blanco 60 cm;400.0;600.0;A;20
+2234koo;lavadora;secadora blanca 60 cm;500.0;600.0;E;33
