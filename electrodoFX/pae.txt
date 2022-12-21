@@ -1,0 +1,3 @@
+555rr;cafetera automática D;cafetera automática Delongui;400.0;600.0;A;21
+666yy;freidora 400;freidora magefesa ;120.0;180.0;C;66
+555555;dddddd;dddddd;66666.0;66666.0;A;66
