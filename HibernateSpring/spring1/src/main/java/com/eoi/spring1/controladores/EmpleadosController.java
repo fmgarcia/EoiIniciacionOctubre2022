@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eoi.spring1.entidades.Empleados;
 import com.eoi.spring1.servicios.EmpleadosService;
 
-@CrossOrigin(origins= {"http://localhost:4200"})  // Configurar el CORS para que Angular pueda acceder a mi API
+@CrossOrigin(origins= {"*"})  // Configurar el CORS para que podamos acceder desde cualquier aplicación.
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadosController {
